@@ -1,10 +1,10 @@
-import express from "express";
+import express, { Application, Request, Response } from "express";
 
-const app = express();
+const app: Application = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Countdown shop server");
 });
 
