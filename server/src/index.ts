@@ -6,13 +6,14 @@ import productRoutes from "./routes/product";
 
 const app: Application = express();
 
-app.use("/products", productRoutes);
+app.use("/api/products", productRoutes);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const CONNECTION_URL = "";
+const CONNECTION_URL =
+  "mongodb+srv://hashimkhanzada:bullsanga786@cluster0.b6rjp.mongodb.net/CountdownShopDB?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose

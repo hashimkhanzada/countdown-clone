@@ -4,25 +4,32 @@ const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true, trim: true },
     image: { type: String, required: true },
-    weight: { type: Number, required: true },
-    pricePer100g: { type: Number, required: true },
-    totalPrice: { type: Number, required: true },
 
+    weightUnit: { type: String, default: "g" },
+    weight: { type: Number, required: true },
+    specificUnit: { type: String, required: true },
+    pricePerSpecificUnit: { type: String, required: true },
+
+    totalPrice: { type: Number },
+
+    originalPrice: { type: String },
+    decimalPrice: { type: String },
+    salePrice: { type: Number },
+    saveAmount: { type: Number },
+
+    madeIn: { type: String },
     description: { type: String },
-    ingredients: [String],
+    ingredients: { type: String },
     nutritionalInfo: { type: String },
     claims: { type: String },
     allergenWarnings: { type: String },
     endorsements: { type: String },
 
+    categoryType: { type: String, required: true },
     category: { type: String, required: true },
     countInStock: { type: Number },
     isOnSale: { type: Boolean, default: false },
-    saleType: { type: String },
-
-    originalPrice: { type: Number, required: true },
-    salePrice: { type: Number },
-    saveAmount: { type: Number },
+    saleType: [String],
   },
   {
     timestamps: true,
