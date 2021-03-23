@@ -28,10 +28,10 @@ export const Button = styled.button<{ extraMargin: string }>`
   &:hover {
     transition: all 0.3s ease-out;
     background: #fff;
-    background-color: #007837;
+    background-color: black;
   }
 
-  @media screen and (max-width: 960px) {
-    width: 100%;
+  @media screen and (max-width: 1030px) {
+    display: none;
   }
 `;

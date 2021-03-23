@@ -62,6 +62,10 @@ export const ShoppingList = styled.div`
   &:hover {
     color: #007837;
   }
+
+  @media screen and (max-width: 1030px) {
+    display: none;
+  }
 `;
 
 export const CheckOutCol = styled.div`
@@ -70,6 +74,12 @@ export const CheckOutCol = styled.div`
   color: #535e65;
   flex: 1;
   justify-content: flex-end;
+
+  span {
+    @media screen and (max-width: 1030px) {
+      display: none;
+    }
+  }
 `;
 
 export const CheckOutIcon = styled(IoCartOutline)`
