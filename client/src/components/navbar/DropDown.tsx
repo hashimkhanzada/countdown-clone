@@ -13,61 +13,61 @@ const DropDown = (props: Props) => {
     <DropDownContainer click={click}>
       <Col>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/fruit-veg">
+          <DropDownLink onClick={handleClick} to="/browse/fruit-veg">
             Fruit & Veg
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/meat-seafood">
+          <DropDownLink onClick={handleClick} to="/browse/meat-seafood">
             Meat & Seafood
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/fridge-deli">
+          <DropDownLink onClick={handleClick} to="/browse/fridge-deli">
             Fridge & Deli
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/frozen">
+          <DropDownLink onClick={handleClick} to="/browse/frozen">
             Frozen
           </DropDownLink>
         </DropDownItem>
       </Col>
       <Col>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/pantry">
+          <DropDownLink onClick={handleClick} to="/browse/pantry">
             Pantry
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/beer-wine">
+          <DropDownLink onClick={handleClick} to="/browse/beer-wine">
             Beer & Wine
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/drinks">
+          <DropDownLink onClick={handleClick} to="/browse/drinks">
             Drinks
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/health-beauty">
+          <DropDownLink onClick={handleClick} to="/browse/health-beauty">
             Health & Beauty
           </DropDownLink>
         </DropDownItem>
       </Col>
       <Col>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/household">
+          <DropDownLink onClick={handleClick} to="/browse/household">
             Household
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/baby-child">
+          <DropDownLink onClick={handleClick} to="/browse/baby-child">
             Baby & Child
           </DropDownLink>
         </DropDownItem>
         <DropDownItem>
-          <DropDownLink onClick={handleClick} to="/pet">
+          <DropDownLink onClick={handleClick} to="/browse/pet">
             Pet
           </DropDownLink>
         </DropDownItem>

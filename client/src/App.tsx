@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchSection from "./components/searchSection/SearchSection";
 import PageMap from "./components/pageMap/PageMap";
 import Home from "./pages/HomePage/Home";
+import Browse from "./pages/BrowsePage/Browse";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
 
       <Switch>
         <Route path="/" exact component={Home} />
-        {/* <Route path="browse/:category" exact component={ } /> */}
+        <Route path="/browse/:category" exact component={Browse} />
       </Switch>
     </Router>
   );
