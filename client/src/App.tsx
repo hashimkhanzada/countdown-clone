@@ -1,11 +1,15 @@
-import React from 'react'; 
-import { Counter } from './features/counter/Counter';
+import React from "react";
+import Navbar from "./components/navbar/Navbar";
+import { Counter } from "./features/counter/Counter";
+import GlobalStyle from "./styles/globalStyles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <h1>HHHHH</h1>
-    </div>
+    <Router>
+      <GlobalStyle />
+      <Navbar />
+    </Router>
   );
 }
 
