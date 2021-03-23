@@ -7,13 +7,7 @@ export const SearchBarContainer = styled.div`
   align-items: center;
   border: 1px solid rgb(155, 155, 155);
   border-radius: 4px;
-`;
-
-export const Select = styled.select`
-  padding: 8px 12px;
-  font-size: 16px;
-  border: none;
-  border-right: 1px solid rgb(155, 155, 155);
+  flex-grow: 1;
 `;
 
 export const Search = styled.div`
@@ -27,6 +21,9 @@ export const SearchInput = styled.input`
   border: none;
   padding: 8px 12px;
   font-size: 16px;
+
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 
   ::placeholder {
     color: rgb(155, 155, 155);

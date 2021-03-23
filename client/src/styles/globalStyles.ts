@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 * {
@@ -11,4 +11,27 @@ export default createGlobalStyle`
  body{
    background-color:#f1f2f3;
  }
+`;
+
+export const Button = styled.button<{ extraMargin: string }>`
+  border-radius: 4px;
+  background: #007837;
+  white-space: nowrap;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin: ${({ extraMargin }) => extraMargin && extraMargin};
+
+  &:hover {
+    transition: all 0.3s ease-out;
+    background: #fff;
+    background-color: #007837;
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
 `;
