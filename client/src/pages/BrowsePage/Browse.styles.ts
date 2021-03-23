@@ -10,7 +10,7 @@ export const BrowseContainer = styled.div`
   justify-content: center;
   padding: 12px 16px;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1520px;
 
   color: #39464e;
 
@@ -67,6 +67,7 @@ export const FilterContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 20px;
 
   p {
     margin-right: 8px;
@@ -81,5 +82,15 @@ export const FilterContainer = styled.div`
     color: #39464e;
     padding: 8px 32px 8px 12px;
     border-radius: 0.25rem;
+  }
+`;
+
+export const ProductsContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  > * {
+    margin: 10px;
   }
 `;

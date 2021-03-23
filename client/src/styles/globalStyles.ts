@@ -13,7 +13,12 @@ export default createGlobalStyle`
  }
 `;
 
-export const Button = styled.button<{ extraMargin: string }>`
+interface ButtonProps {
+  extraMargin?: string;
+  maxWidth?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   border-radius: 4px;
   background: #007837;
   white-space: nowrap;
@@ -24,11 +29,11 @@ export const Button = styled.button<{ extraMargin: string }>`
   border: none;
   cursor: pointer;
   margin: ${({ extraMargin }) => extraMargin && extraMargin};
+  width: ${({ maxWidth }) => maxWidth && "100%"};
+  transition: all 0.3s ease-out;
 
   &:hover {
-    transition: all 0.3s ease-out;
-    background: #fff;
-    background-color: black;
+    background-color: darkgreen;
   }
 
   @media screen and (max-width: 1030px) {

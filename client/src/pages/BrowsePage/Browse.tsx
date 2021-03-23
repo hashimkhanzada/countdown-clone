@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ProductCard from "../../components/productCard/ProductCard";
 
 import {
   BrowseContainer,
@@ -7,6 +8,7 @@ import {
   HeadingContainer,
   FilterContainer,
   BrowseMain,
+  ProductsContainer,
 } from "./Browse.styles";
 
 interface Props {}
@@ -38,6 +40,14 @@ const Browse = ({ match }: any) => {
               <option value="">Relevance</option>
             </select>
           </FilterContainer>
+          <ProductsContainer>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </ProductsContainer>
         </ProductColumn>
       </BrowseContainer>
     </BrowseMain>
