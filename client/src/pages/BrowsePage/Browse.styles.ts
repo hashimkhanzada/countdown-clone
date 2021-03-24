@@ -23,7 +23,6 @@ export const CategoryColumn = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin-right: 32px;
   padding: 12px 0;
 
   h3 {
@@ -35,11 +34,24 @@ export const CategoryColumn = styled.div`
   p {
     color: #007837;
     margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      text-decoration: underline;
+      color: #39464e;
+    }
   }
 `;
 
 export const ProductColumn = styled.div`
-  width: 100%;
+  width: 85%;
+  margin-left: 32px;
+
+  @media screen and (max-width: 1030px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
 export const HeadingContainer = styled.div`

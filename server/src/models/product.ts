@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema(
     endorsements: { type: String },
 
     mainCategory: { type: String, required: true },
-    category: { type: String, required: true },
+    subCategory: { type: String, required: true },
     countInStock: { type: Number },
     isOnSale: { type: Boolean, default: false },
     saleType: [String],

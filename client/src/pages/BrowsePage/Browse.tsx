@@ -14,7 +14,7 @@ import {
 
 interface ProductInfo {
   _id?: string;
-  category?: string;
+  subCategory?: string;
   claims?: string;
   decimalPrice?: string;
   image?: string;
@@ -34,14 +34,17 @@ interface ProductInfo {
 
 const Browse = ({ match }: any) => {
   const [productData, setProductData] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
 
   useEffect(() => {
     const GetData = async () => {
       await createAPIEndpoint(ENDPOINTS.BROWSE)
         .fetchByMainCategory(match.params.mainCategory)
         .then((response: any) => {
-          setProductData(response.data);
-          console.log(response.data);
+          setProductData(response.data.productData);
+          setSubCategory(response.data.subCategoryData);
+
+          // console.log(response.data);
         })
         .catch((err) => console.log(err));
     };
@@ -54,16 +57,18 @@ const Browse = ({ match }: any) => {
       <BrowseContainer>
         <CategoryColumn>
           <h3>Categories</h3>
-          <p>Fruit (79)</p>
-          <p>Vegetables (79)</p>
-          <p>Fruit (79)</p>
-          <p>Vegetables (79)</p>
-          <p>Organic Fruit {"&"} Vegetables (79)</p>
+          {subCategory?.map(({ subCategoryName, numberOfItems }) => {
+            return (
+              <p>
+                {subCategoryName} ({numberOfItems})
+              </p>
+            );
+          })}
         </CategoryColumn>
         <ProductColumn>
           <HeadingContainer>
             <h1>Fruits {"&"} Veg</h1>
-            <span>318 Items</span>
+            <span>{productData.length} items</span>
           </HeadingContainer>
           <FilterContainer>
             <p>Sort by:</p>
@@ -72,30 +77,29 @@ const Browse = ({ match }: any) => {
             </select>
           </FilterContainer>
           <ProductsContainer>
-            {productData &&
-              productData.map((data: ProductInfo) => {
-                return (
-                  <ProductCard
-                    key={data._id}
-                    name={data.name}
-                    category={data.category}
-                    claims={data.claims}
-                    decimalPrice={data.decimalPrice}
-                    image={data.image}
-                    ingredients={data.ingredients}
-                    isOnSale={data.isOnSale}
-                    madeIn={data.madeIn}
-                    mainCategory={data.mainCategory}
-                    originalPrice={data.originalPrice}
-                    pricePerSpecificUnit={data.pricePerSpecificUnit}
-                    saleType={data.saleType}
-                    specificUnit={data.specificUnit}
-                    totalPrice={data.totalPrice}
-                    weight={data.weight}
-                    weightUnit={data.weightUnit}
-                  />
-                );
-              })}
+            {productData?.map((data: ProductInfo) => {
+              return (
+                <ProductCard
+                  key={data._id}
+                  name={data.name}
+                  subCategory={data.subCategory}
+                  claims={data.claims}
+                  decimalPrice={data.decimalPrice}
+                  image={data.image}
+                  ingredients={data.ingredients}
+                  isOnSale={data.isOnSale}
+                  madeIn={data.madeIn}
+                  mainCategory={data.mainCategory}
+                  originalPrice={data.originalPrice}
+                  pricePerSpecificUnit={data.pricePerSpecificUnit}
+                  saleType={data.saleType}
+                  specificUnit={data.specificUnit}
+                  totalPrice={data.totalPrice}
+                  weight={data.weight}
+                  weightUnit={data.weightUnit}
+                />
+              );
+            })}
           </ProductsContainer>
         </ProductColumn>
       </BrowseContainer>

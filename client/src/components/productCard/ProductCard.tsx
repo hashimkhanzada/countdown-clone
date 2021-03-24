@@ -12,7 +12,7 @@ import {
 } from "./ProductCard.styles";
 
 interface Props {
-  category?: string;
+  subCategory?: string;
   claims?: string;
   decimalPrice?: string;
   image?: string;

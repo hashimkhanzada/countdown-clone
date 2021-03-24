@@ -21,7 +21,7 @@ const data = [
     allergenWarnings: "Contains: Gluten",
 
     mainCategory: "pantry",
-    category: "Baking",
+    subCategory: "Baking",
     isOnSale: true,
     saleType: ["greatPrice"],
   },
@@ -45,7 +45,7 @@ const data = [
       "Enjoy 6 eggs a week as part of a healthy diet., Good eggs. Good choice., Cage eggs may include eggs laid by colony hens.",
 
     mainCategory: "pantry",
-    category: "Eggs",
+    subCategory: "Eggs",
   },
   {
     name: "Countdown White Sugar",
@@ -68,7 +68,7 @@ const data = [
       "Pure cane, Makes the day a little sweeter, Did you know - This pack of Countdown Sugar is proudly Bonsucro certified. Bonsucro is the global change platform for the sugarcane industry, whose mission is to ensure that responsible sugarcane production creates lasting value for the people, communities, businesses, economies and eco-systems in all cane-growing origins. This pack represents our commitment to helping build a sugarcane industry that promotes sustainability for future generations.",
 
     mainCategory: "pantry",
-    category: "Baking",
+    subCategory: "Baking",
     isOnSale: true,
     saleType: ["greatPrice", "countdownOwns"],
   },
@@ -91,7 +91,7 @@ const data = [
       "100% natural fruit, GOOD FOR YOU, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, No added sugar, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, No artificial colours, falvours or preservatives, Why not try adding some natural sweetness to your muffins with frozen blueberries",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -115,7 +115,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -139,7 +139,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -163,7 +163,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -187,7 +187,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -211,7 +211,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -235,7 +235,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "frozen",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
@@ -261,7 +261,7 @@ const data = [
       "GOOD FOR YOU, No added sugar, No artificial colours, flavours or preservatives, Why not try perfecting your pavlova with these frozen mixed berries and a sprinkling of vanilla powder, Source of vitamin C for a healthy immune system - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Fruit a day: 1 cup = 1 serve of fruit - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day, Source of fibre for healthy digestion - as part of a healthy balanced diet. One serve of fruit is equal to approximately 150g fruit. Australian dietary recommends 2 serves of fruit per day",
 
     mainCategory: "pantry",
-    category: "Frozen Fruit & Drink",
+    subCategory: "Frozen Fruit & Drink",
     isOnSale: true,
     saleType: ["countdownOwns"],
   },
