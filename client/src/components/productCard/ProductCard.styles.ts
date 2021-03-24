@@ -12,6 +12,13 @@ export const ProductCardContainer = styled.div`
   padding: 0.75rem 1rem;
   color: #39464e;
   width: 225px;
+  border: solid 2px transparent;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    border: solid 2px #007837;
+  }
 
   @media screen and (max-width: 1030px) {
     width: 100%;
@@ -20,6 +27,8 @@ export const ProductCardContainer = styled.div`
 `;
 
 export const ProductInfoContainer = styled.div`
+  cursor: pointer;
+
   @media screen and (max-width: 1030px) {
     display: flex;
     align-items: flex-start;

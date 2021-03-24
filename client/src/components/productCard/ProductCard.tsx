@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../../styles/globalStyles";
+import { Link } from "react-router-dom";
 
 import {
   ProductCardContainer,
@@ -12,6 +13,7 @@ import {
 } from "./ProductCard.styles";
 
 interface Props {
+  _id?: string;
   subCategory?: string;
   claims?: string;
   decimalPrice?: string;
@@ -34,30 +36,35 @@ const ProductCard = (props: Props) => {
   return (
     <ProductCardContainer>
       <ProductInfoContainer>
-        <ProductImage>
-          <img src={props.image} alt={props.name} />
-        </ProductImage>
-        <PriceInfoContainer>
-          <ProductInfo>
-            <h2>{props.name}</h2>
-            <span>
-              {props.weight}
-              {props.weightUnit} ${props.pricePerSpecificUnit} /{" "}
-              {props.specificUnit}
-            </span>
-          </ProductInfo>
-          <PriceInfo>
-            <div>
-              <h4>$</h4>
-              <h3>{props.originalPrice}</h3>
-              <h4>{props.decimalPrice}</h4>
-            </div>
-          </PriceInfo>
-        </PriceInfoContainer>
+        <Link
+          to={`/product/${props._id}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <ProductImage>
+            <img src={props.image} alt={props.name} />
+          </ProductImage>
+          <PriceInfoContainer>
+            <ProductInfo>
+              <h2>{props.name}</h2>
+              <span>
+                {props.weight}
+                {props.weightUnit} ${props.pricePerSpecificUnit} /{" "}
+                {props.specificUnit}
+              </span>
+            </ProductInfo>
+            <PriceInfo>
+              <div>
+                <h4>$</h4>
+                <h3>{props.originalPrice}</h3>
+                <h4>{props.decimalPrice}</h4>
+              </div>
+            </PriceInfo>
+          </PriceInfoContainer>
+        </Link>
       </ProductInfoContainer>
 
       <ProductButton>
-        <Button maxWidth>Add to trolley</Button>
+        <Button propWidth="100%">Add to trolley</Button>
       </ProductButton>
     </ProductCardContainer>
   );

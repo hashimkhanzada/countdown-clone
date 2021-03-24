@@ -120,6 +120,7 @@ const Browse = ({ match }: any) => {
               return (
                 <ProductCard
                   key={data._id}
+                  _id={data._id}
                   name={data.name}
                   subCategory={data.subCategory}
                   claims={data.claims}

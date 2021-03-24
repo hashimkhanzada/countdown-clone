@@ -15,7 +15,7 @@ export default createGlobalStyle`
 
 interface ButtonProps {
   extraMargin?: string;
-  maxWidth?: boolean;
+  propWidth?: string;
   hideMobile?: boolean;
   maxWidthMobile?: boolean;
 }
@@ -31,11 +31,11 @@ export const Button = styled.button<ButtonProps>`
   border: none;
   cursor: pointer;
   margin: ${({ extraMargin }) => extraMargin && extraMargin};
-  width: ${({ maxWidth }) => maxWidth && "100%"};
+  width: ${({ propWidth }) => propWidth};
   transition: all 0.3s ease-out;
 
   &:hover {
-    background-color: darkgreen;
+    background-color: #00411e;
   }
 
   @media screen and (max-width: 1030px) {

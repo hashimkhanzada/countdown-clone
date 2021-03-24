@@ -21,6 +21,6 @@ router.get(
   "/browse/:mainCategory/subcategory",
   expressAsyncHandler(getSubCategoryData)
 );
-router.get("/:id", expressAsyncHandler(getProductById));
+router.get("/browse/:id", expressAsyncHandler(getProductById));
 
 export default router;
