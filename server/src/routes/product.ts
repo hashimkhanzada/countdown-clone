@@ -6,6 +6,7 @@ import {
   getProductById,
   getProductByMainCategory,
   seedProducts,
+  getSubCategoryData,
 } from "../controllers/products";
 
 const router = express.Router();
@@ -13,8 +14,12 @@ const router = express.Router();
 router.get("/", expressAsyncHandler(getProducts));
 router.get("/seed", expressAsyncHandler(seedProducts));
 router.get(
-  "/browse/:mainCategory",
+  "/browse/:mainCategory/data",
   expressAsyncHandler(getProductByMainCategory)
+);
+router.get(
+  "/browse/:mainCategory/subcategory",
+  expressAsyncHandler(getSubCategoryData)
 );
 router.get("/:id", expressAsyncHandler(getProductById));
 

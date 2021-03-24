@@ -106,3 +106,10 @@ export const ProductsContainer = styled.div`
     margin: 10px;
   }
 `;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 10px;
+  margin-top: 10px;
+`;

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const ProductCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #fff;
   border: none;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 35%);
@@ -12,6 +15,7 @@ export const ProductCardContainer = styled.div`
 
   @media screen and (max-width: 1030px) {
     width: 100%;
+    display: block;
   }
 `;
 
@@ -56,7 +60,9 @@ export const ProductInfo = styled.div`
   }
 `;
 
-export const ProductButton = styled.div``;
+export const ProductButton = styled.div`
+  display: flex;
+`;
 
 export const PriceInfoContainer = styled.div`
   @media screen and (max-width: 1030px) {

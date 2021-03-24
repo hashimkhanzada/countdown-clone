@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
+import PaginationBar from "../../components/paginationBar/PaginationBar";
 
 import {
   BrowseContainer,
@@ -10,6 +11,7 @@ import {
   FilterContainer,
   BrowseMain,
   ProductsContainer,
+  PaginationContainer,
 } from "./Browse.styles";
 
 interface ProductInfo {
@@ -35,21 +37,58 @@ interface ProductInfo {
 const Browse = ({ match }: any) => {
   const [productData, setProductData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLastPage, setIsLastPage] = useState(true);
+  const [isFirstPage, setIsFirstPage] = useState(true);
 
   useEffect(() => {
     const GetData = async () => {
       await createAPIEndpoint(ENDPOINTS.BROWSE)
-        .fetchByMainCategory(match.params.mainCategory)
+        .fetchProductsByMainCategory(
+          match.params.mainCategory,
+          currentPage,
+          itemsPerPage
+        )
         .then((response: any) => {
-          setProductData(response.data.productData);
-          setSubCategory(response.data.subCategoryData);
+          setProductData(response.data.results.paginatedProducts);
+          setTotalItems(response.data.totalProducts);
 
-          // console.log(response.data);
+          response.data.results.next.page
+            ? setIsLastPage(false)
+            : setIsLastPage(true);
+
+          response.data.results.previous.page
+            ? setIsFirstPage(false)
+            : setIsFirstPage(true);
+
+          console.log(response.data.results);
+        })
+        .catch((err) => console.log(err));
+
+      await createAPIEndpoint(ENDPOINTS.BROWSE)
+        .fetchSubCategoryData(match.params.mainCategory)
+        .then((response: any) => {
+          setSubCategory(response.data);
         })
         .catch((err) => console.log(err));
     };
 
     GetData();
+  }, [match, currentPage]);
+
+  useEffect(() => {
+    const GetSubData = async () => {
+      await createAPIEndpoint(ENDPOINTS.BROWSE)
+        .fetchSubCategoryData(match.params.mainCategory)
+        .then((response: any) => {
+          setSubCategory(response.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    GetSubData();
   }, [match]);
 
   return (
@@ -59,7 +98,7 @@ const Browse = ({ match }: any) => {
           <h3>Categories</h3>
           {subCategory?.map(({ subCategoryName, numberOfItems }) => {
             return (
-              <p>
+              <p key={subCategoryName}>
                 {subCategoryName} ({numberOfItems})
               </p>
             );
@@ -68,7 +107,7 @@ const Browse = ({ match }: any) => {
         <ProductColumn>
           <HeadingContainer>
             <h1>Fruits {"&"} Veg</h1>
-            <span>{productData.length} items</span>
+            <span>{productData?.length} items</span>
           </HeadingContainer>
           <FilterContainer>
             <p>Sort by:</p>
@@ -101,6 +140,24 @@ const Browse = ({ match }: any) => {
               );
             })}
           </ProductsContainer>
+          <PaginationContainer>
+            <PaginationBar
+              itemsPerPage={itemsPerPage}
+              totalItems={totalItems}
+              selectedPage={currentPage}
+              onPageChange={(e: any) => {
+                setCurrentPage(e.target.id);
+              }}
+              nextPage={() => {
+                setCurrentPage(!isLastPage ? +currentPage + 1 : currentPage);
+              }}
+              prevPage={() => {
+                setCurrentPage(!isFirstPage ? +currentPage - 1 : currentPage);
+              }}
+              isFirstPage={isFirstPage}
+              isLastPage={isLastPage}
+            />
+          </PaginationContainer>
         </ProductColumn>
       </BrowseContainer>
     </BrowseMain>

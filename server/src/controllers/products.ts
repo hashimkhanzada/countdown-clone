@@ -38,36 +38,70 @@ export const getProductById = async (req: Request, res: Response) => {
 
 export const getProductByMainCategory = async (req: Request, res: Response) => {
   const category = req.params.mainCategory.toLowerCase();
+  const productCount = await Product.find({
+    mainCategory: category,
+  }).countDocuments();
+
+  const results = { paginatedProducts: [], next: {}, previous: {} };
+
+  const page = +req.query.page;
+  const limit = +req.query.limit;
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  if (endIndex < productCount) {
+    results.next = {
+      page: page + 1,
+    };
+  }
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+    };
+  }
+
+  try {
+    results.paginatedProducts = await Product.find({
+      mainCategory: category,
+    })
+      .limit(limit)
+      .skip(startIndex);
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.send({ results: results, totalProducts: productCount });
+};
+
+export const getSubCategoryData = async (req: Request, res: Response) => {
+  const category = req.params.mainCategory.toLowerCase();
+
   const products = await Product.find({
     mainCategory: category,
   });
 
-  if (products) {
-    const subCategories = [];
+  const subCategories = [];
 
-    products.forEach((element: ProductInfo) => {
-      if (
-        !subCategories.some(
-          (item) => item.subCategoryName == element.subCategory
-        )
-      ) {
-        subCategories.push({
-          subCategoryName: element.subCategory,
-          numberOfItems: 1,
-        });
-      } else {
-        subCategories.forEach((sub) => {
-          if (sub.subCategoryName === element.subCategory) {
-            sub.numberOfItems = sub.numberOfItems + 1;
-          }
-        });
-      }
-    });
+  products.forEach((element: ProductInfo) => {
+    if (
+      !subCategories.some((item) => item.subCategoryName == element.subCategory)
+    ) {
+      subCategories.push({
+        subCategoryName: element.subCategory,
+        numberOfItems: 1,
+      });
+    } else {
+      subCategories.forEach((sub) => {
+        if (sub.subCategoryName === element.subCategory) {
+          sub.numberOfItems = sub.numberOfItems + 1;
+        }
+      });
+    }
+  });
 
-    res.send({ productData: products, subCategoryData: subCategories });
-  } else {
-    res.status(404).send({ message: "No Products for this category" });
-  }
+  res.send(subCategories);
 };
 
 export const seedProducts = async (req: Request, res: Response) => {

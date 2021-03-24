@@ -13,7 +13,16 @@ export const createAPIEndpoint = (endpoint: String) => {
   return {
     fetchAllProducts: () => axios.get(url),
     fetchById: (id: String) => axios.get(`${url}/${id}`),
-    fetchByMainCategory: (mainCategory: String) =>
-      axios.get(`${url}/${mainCategory}`),
+    fetchProductsByMainCategory: (
+      mainCategory: String,
+      currentPage: number,
+      listLimit: number
+    ) =>
+      axios.get(
+        `${url}/${mainCategory}/data?page=${currentPage}&limit=${listLimit}`
+      ),
+
+    fetchSubCategoryData: (mainCategory: String) =>
+      axios.get(`${url}/${mainCategory}/subcategory`),
   };
 };
