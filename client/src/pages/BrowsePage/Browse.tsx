@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
+import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 
 import {
   BrowseContainer,
@@ -11,11 +12,41 @@ import {
   ProductsContainer,
 } from "./Browse.styles";
 
-interface Props {}
+interface ProductInfo {
+  _id?: string;
+  category?: string;
+  claims?: string;
+  decimalPrice?: string;
+  image?: string;
+  ingredients?: string;
+  isOnSale?: boolean;
+  madeIn?: string;
+  mainCategory?: string;
+  name?: string;
+  originalPrice?: string;
+  pricePerSpecificUnit?: string;
+  saleType?: [string];
+  specificUnit?: string;
+  totalPrice?: number;
+  weight?: number;
+  weightUnit?: string;
+}
 
 const Browse = ({ match }: any) => {
+  const [productData, setProductData] = useState([]);
+
   useEffect(() => {
-    console.log(match.params.category);
+    const GetData = async () => {
+      await createAPIEndpoint(ENDPOINTS.BROWSE)
+        .fetchByMainCategory(match.params.mainCategory)
+        .then((response: any) => {
+          setProductData(response.data);
+          console.log(response.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    GetData();
   }, [match]);
 
   return (
@@ -41,12 +72,30 @@ const Browse = ({ match }: any) => {
             </select>
           </FilterContainer>
           <ProductsContainer>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {productData &&
+              productData.map((data: ProductInfo) => {
+                return (
+                  <ProductCard
+                    key={data._id}
+                    name={data.name}
+                    category={data.category}
+                    claims={data.claims}
+                    decimalPrice={data.decimalPrice}
+                    image={data.image}
+                    ingredients={data.ingredients}
+                    isOnSale={data.isOnSale}
+                    madeIn={data.madeIn}
+                    mainCategory={data.mainCategory}
+                    originalPrice={data.originalPrice}
+                    pricePerSpecificUnit={data.pricePerSpecificUnit}
+                    saleType={data.saleType}
+                    specificUnit={data.specificUnit}
+                    totalPrice={data.totalPrice}
+                    weight={data.weight}
+                    weightUnit={data.weightUnit}
+                  />
+                );
+              })}
           </ProductsContainer>
         </ProductColumn>
       </BrowseContainer>

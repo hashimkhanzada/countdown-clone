@@ -16,6 +16,8 @@ export default createGlobalStyle`
 interface ButtonProps {
   extraMargin?: string;
   maxWidth?: boolean;
+  hideMobile?: boolean;
+  maxWidthMobile?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -37,6 +39,7 @@ export const Button = styled.button<ButtonProps>`
   }
 
   @media screen and (max-width: 1030px) {
-    display: none;
+    display: ${({ hideMobile }) => hideMobile && "none"};
+    width: ${({ maxWidthMobile }) => maxWidthMobile && "100%"};
   }
 `;

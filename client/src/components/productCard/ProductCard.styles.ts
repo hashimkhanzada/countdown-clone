@@ -5,10 +5,22 @@ export const ProductCardContainer = styled.div`
   border: none;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 35%);
   overflow: hidden;
-  position: relative;
   border-radius: 0;
   padding: 0.75rem 1rem;
   color: #39464e;
+  width: 225px;
+
+  @media screen and (max-width: 1030px) {
+    width: 100%;
+  }
+`;
+
+export const ProductInfoContainer = styled.div`
+  @media screen and (max-width: 1030px) {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 10px;
+  }
 `;
 
 export const ProductImage = styled.div`
@@ -16,9 +28,19 @@ export const ProductImage = styled.div`
   justify-content: center;
   margin: 20px 0;
 
+  @media screen and (max-width: 1030px) {
+    margin-top: 5px;
+    margin-right: 1rem;
+    height: 100%;
+  }
+
   img {
     width: 160px;
     object-fit: contain;
+
+    @media screen and (max-width: 1030px) {
+      width: 85px;
+    }
   }
 `;
 
@@ -35,18 +57,40 @@ export const ProductInfo = styled.div`
 `;
 
 export const ProductButton = styled.div``;
+
+export const PriceInfoContainer = styled.div`
+  @media screen and (max-width: 1030px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 export const PriceInfo = styled.div`
   font-size: 23px;
   margin: 15px 0;
-  h3 {
-    em {
-      vertical-align: top;
+
+  @media screen and (max-width: 1030px) {
+    margin: 10px 0;
+  }
+
+  div {
+    display: flex;
+
+    h3 {
       font-size: 48px;
-      font-style: normal;
+
+      @media screen and (max-width: 1030px) {
+        font-size: 30px;
+      }
     }
 
-    span {
+    h4 {
       font-size: 18px;
+      padding-top: 14px;
+      @media screen and (max-width: 1030px) {
+        font-size: 14px;
+        padding-top: 8px;
+      }
     }
   }
 `;

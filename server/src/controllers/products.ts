@@ -16,6 +16,19 @@ export const getProductById = async (req: Request, res: Response) => {
   }
 };
 
+export const getProductByMainCategory = async (req: Request, res: Response) => {
+  const category = req.params.mainCategory.toLowerCase();
+  const products = await Product.find({
+    mainCategory: category,
+  });
+
+  if (products) {
+    res.send(products);
+  } else {
+    res.status(404).send({ message: "No Products for this category" });
+  }
+};
+
 export const seedProducts = async (req: Request, res: Response) => {
   await Product.remove({});
   const createdProducts = await Product.insertMany(data);

@@ -10,7 +10,7 @@ export const BrowseContainer = styled.div`
   justify-content: center;
   padding: 12px 16px;
   width: 100%;
-  max-width: 1520px;
+  max-width: 1440px;
 
   color: #39464e;
 

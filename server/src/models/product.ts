@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema(
     allergenWarnings: { type: String },
     endorsements: { type: String },
 
-    categoryType: { type: String, required: true },
+    mainCategory: { type: String, required: true },
     category: { type: String, required: true },
     countInStock: { type: Number },
     isOnSale: { type: Boolean, default: false },

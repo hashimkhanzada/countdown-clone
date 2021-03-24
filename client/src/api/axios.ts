@@ -3,7 +3,8 @@ import axios from "axios";
 const BASE_URL = "http://localhost:5000/api/";
 
 export const ENDPOINTS = {
-  Products: "products",
+  PRODUCTS: "products",
+  BROWSE: "products/browse",
 };
 
 export const createAPIEndpoint = (endpoint: String) => {
@@ -12,5 +13,7 @@ export const createAPIEndpoint = (endpoint: String) => {
   return {
     fetchAllProducts: () => axios.get(url),
     fetchById: (id: String) => axios.get(`${url}/${id}`),
+    fetchByMainCategory: (mainCategory: String) =>
+      axios.get(`${url}/${mainCategory}`),
   };
 };

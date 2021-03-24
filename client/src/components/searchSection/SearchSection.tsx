@@ -45,7 +45,9 @@ const SearchSection = (props: Props) => {
         <CheckOutCol>
           <CheckOutIcon />
           <span>{numberOfItems} items - </span>${totalPrice}
-          <Button extraMargin="0 16px">Checkout</Button>
+          <Button extraMargin="0 16px" hideMobile>
+            Checkout
+          </Button>
         </CheckOutCol>
       </SearchRow>
     </SearchSectionContainer>
