@@ -71,6 +71,37 @@ export const ProductInfo = styled.div`
 
 export const ProductButton = styled.div`
   display: flex;
+
+  input {
+    border: 1px solid #b4b9bc;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    color: #39464e;
+    width: 100%;
+  }
+
+  .add {
+    border-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+
+    * {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .remove {
+    border-radius: 0;
+    margin-right: 1px;
+
+    * {
+      width: 22px;
+      height: 22px;
+    }
+  }
 `;
 
 export const PriceInfoContainer = styled.div`

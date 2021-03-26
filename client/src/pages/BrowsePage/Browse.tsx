@@ -62,8 +62,6 @@ const Browse = ({ match }: any) => {
           response.data.results.previous.page
             ? setIsFirstPage(false)
             : setIsFirstPage(true);
-
-          console.log(response.data.results);
         })
         .catch((err) => console.log(err));
 

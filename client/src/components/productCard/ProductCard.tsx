@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../../styles/globalStyles";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+
+import {
+  incrementCart,
+  decrementCart,
+  addToCartByAmount,
+  incrementAsync,
+  selectCart,
+  changeCartCount,
+  removeFromCart,
+} from "../../features/cart/cartSlice";
 
 import {
   ProductCardContainer,
@@ -33,13 +45,47 @@ interface Props {
 }
 
 const ProductCard = (props: Props) => {
+  const dispatch = useDispatch();
+  const [numberSelected, setNumberSelected] = useState(1);
+  const cart = useSelector(selectCart);
+  const [isInCart, setIsInCart] = useState(false);
+
+  const addToCart = () => {
+    let cartData = { selectedProduct: props, count: numberSelected };
+
+    setIsInCart(true);
+    dispatch(incrementCart(cartData));
+  };
+
+  const removeFromCart = () => {
+    const { _id } = props;
+    let cartData = {
+      selectedProduct: {
+        _id,
+      },
+      count: numberSelected,
+    };
+
+    dispatch(decrementCart(cartData));
+  };
+
+  useEffect(() => {
+    cart.forEach((cartItem: any) => {
+      if (cartItem._id === props._id) {
+        setNumberSelected(cartItem.quantity);
+
+        cartItem.quantity === 0 ? setIsInCart(false) : setIsInCart(true);
+      }
+    });
+  }, [cart]);
+
   return (
     <ProductCardContainer>
-      <ProductInfoContainer>
-        <Link
-          to={`/product/${props._id}`}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
+      <Link
+        to={`/product/${props._id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <ProductInfoContainer>
           <ProductImage>
             <img src={props.image} alt={props.name} />
           </ProductImage>
@@ -60,11 +106,28 @@ const ProductCard = (props: Props) => {
               </div>
             </PriceInfo>
           </PriceInfoContainer>
-        </Link>
-      </ProductInfoContainer>
+        </ProductInfoContainer>
+      </Link>
 
       <ProductButton>
-        <Button propWidth="100%">Add to trolley</Button>
+        {isInCart ? (
+          <>
+            <input
+              value={numberSelected}
+              onChange={(e: any) => setNumberSelected(e.target.value)}
+            />
+            <Button className="remove" onClick={removeFromCart} propWidth="50%">
+              <AiOutlineMinus />
+            </Button>
+            <Button className="add" onClick={addToCart} propWidth="50%">
+              <AiOutlinePlus />
+            </Button>
+          </>
+        ) : (
+          <Button onClick={addToCart} propWidth="100%">
+            Add to trolley
+          </Button>
+        )}
       </ProductButton>
     </ProductCardContainer>
   );

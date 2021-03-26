@@ -21,10 +21,13 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
   background: #007837;
   white-space: nowrap;
-  padding: 8px 12px;
+  padding: 12px 12px;
   color: #fff;
   font-size: 16px;
   outline: none;
