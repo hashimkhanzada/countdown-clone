@@ -36,6 +36,46 @@ export const getProductById = async (req: Request, res: Response) => {
   }
 };
 
+export const getProductsBySearch = async (req: Request, res: Response) => {
+  const searchTerm = req.query.searchTerm;
+
+  const productCount = await Product.find({
+    name: { $regex: searchTerm, $options: "i" },
+  }).countDocuments();
+
+  const results = { paginatedProducts: [], next: {}, previous: {} };
+
+  const page = +req.query.page;
+  const limit = +req.query.limit;
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  if (endIndex < productCount) {
+    results.next = {
+      page: page + 1,
+    };
+  }
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+    };
+  }
+
+  try {
+    results.paginatedProducts = await Product.find({
+      name: { $regex: searchTerm, $options: "i" },
+    })
+      .limit(limit)
+      .skip(startIndex);
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.send({ results: results, totalProducts: productCount });
+};
+
 export const getProductByMainCategory = async (req: Request, res: Response) => {
   const category = req.params.mainCategory.toLowerCase();
   const productCount = await Product.find({
@@ -73,6 +113,33 @@ export const getProductByMainCategory = async (req: Request, res: Response) => {
   }
 
   res.send({ results: results, totalProducts: productCount });
+};
+
+export const getMainCategoryData = async (req: Request, res: Response) => {
+  const searchTerm = req.query.searchTerm;
+
+  const products = await Product.find({
+    name: { $regex: searchTerm, $options: "i" },
+  });
+
+  const categories = [];
+
+  products.forEach((element: ProductInfo) => {
+    if (!categories.some((item) => item.categoryName == element.mainCategory)) {
+      categories.push({
+        categoryName: element.mainCategory,
+        numberOfItems: 1,
+      });
+    } else {
+      categories.forEach((sub) => {
+        if (sub.categoryName === element.mainCategory) {
+          sub.numberOfItems = sub.numberOfItems + 1;
+        }
+      });
+    }
+  });
+
+  res.send(categories);
 };
 
 export const getSubCategoryData = async (req: Request, res: Response) => {

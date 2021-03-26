@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PaginationBar from "../../components/paginationBar/PaginationBar";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
-  BrowseContainer,
+  changeSearchTerm,
+  selectSearch,
+  searchClicked,
+  selectSearchClicked,
+} from "../../features/search/searchSlice";
+
+import {
+  SearchContainer,
   CategoryColumn,
   ProductColumn,
   HeadingContainer,
   FilterContainer,
-  BrowseMain,
+  SearchMain,
   ProductsContainer,
   PaginationContainer,
-} from "./Browse.styles";
+} from "./Search.styles";
 
 interface ProductInfo {
   _id?: string;
@@ -34,7 +42,7 @@ interface ProductInfo {
   weightUnit?: string;
 }
 
-const Browse = ({ match }: any) => {
+const Search = ({ match }: any) => {
   const [productData, setProductData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(12);
@@ -43,14 +51,13 @@ const Browse = ({ match }: any) => {
   const [isLastPage, setIsLastPage] = useState(true);
   const [isFirstPage, setIsFirstPage] = useState(true);
 
+  const dispatch = useDispatch();
+  const searchValue = useSelector(selectSearch);
+
   useEffect(() => {
-    const GetData = async () => {
-      await createAPIEndpoint(ENDPOINTS.BROWSE)
-        .fetchProductsByMainCategory(
-          match.params.mainCategory,
-          currentPage,
-          itemsPerPage
-        )
+    const GetSearchData = async () => {
+      await createAPIEndpoint(ENDPOINTS.SEARCHPRODUCT)
+        .fetchBySearch(searchValue, currentPage, itemsPerPage)
         .then((response: any) => {
           setProductData(response.data.results.paginatedProducts);
           setTotalItems(response.data.totalProducts);
@@ -65,32 +72,33 @@ const Browse = ({ match }: any) => {
         })
         .catch((err) => console.log(err));
     };
-
-    GetData();
-  }, [match, currentPage]);
+    GetSearchData();
+  }, [match, currentPage, searchValue]);
 
   useEffect(() => {
-    const GetSubData = async () => {
-      await createAPIEndpoint(ENDPOINTS.BROWSE)
-        .fetchSubCategoryData(match.params.mainCategory)
+    const GetCategoryData = async () => {
+      await createAPIEndpoint(ENDPOINTS.SEARCHPRODUCT)
+        .fetchMainCategoryData(searchValue)
         .then((response: any) => {
           setSubCategory(response.data);
+          console.log(response);
         })
         .catch((err) => console.log(err));
     };
-
-    GetSubData();
-  }, [match]);
+    if (searchValue) {
+      GetCategoryData();
+    }
+  }, [match, searchValue]);
 
   return (
-    <BrowseMain>
-      <BrowseContainer>
+    <SearchMain>
+      <SearchContainer>
         <CategoryColumn>
           <h3>Categories</h3>
-          {subCategory?.map(({ subCategoryName, numberOfItems }) => {
+          {subCategory?.map(({ categoryName, numberOfItems }) => {
             return (
-              <p key={subCategoryName}>
-                {subCategoryName} ({numberOfItems})
+              <p key={categoryName}>
+                {categoryName} ({numberOfItems})
               </p>
             );
           })}
@@ -151,9 +159,9 @@ const Browse = ({ match }: any) => {
             />
           </PaginationContainer>
         </ProductColumn>
-      </BrowseContainer>
-    </BrowseMain>
+      </SearchContainer>
+    </SearchMain>
   );
 };
 
-export default Browse;
+export default Search;

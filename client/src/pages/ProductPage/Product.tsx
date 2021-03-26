@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { createAPIEndpoint, ENDPOINTS } from "../../../api/axios";
-import { Button } from "../../../styles/globalStyles";
+import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
+import { Button } from "../../styles/globalStyles";
 
 import {
   ProductContainer,

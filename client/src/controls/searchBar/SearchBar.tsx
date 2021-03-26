@@ -1,4 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  changeSearchTerm,
+  selectSearch,
+  searchClicked,
+} from "../../features/search/searchSlice";
 
 import {
   SearchBarContainer,
@@ -10,11 +17,30 @@ import {
 interface Props {}
 
 const SearchBar = (props: Props) => {
+  const dispatch = useDispatch();
+  const searchValue = useSelector(selectSearch);
+
+  useEffect(() => {
+    console.log(searchValue);
+  }, [searchValue]);
+
+  const searchProduct = (e: any) => {
+    e.preventDefault();
+    if (searchValue) {
+    }
+  };
+
   return (
     <SearchBarContainer>
       <Search>
-        <SearchInput placeholder="Search Groceries" />
-        <SearchIcon />
+        <SearchInput
+          value={searchValue}
+          onChange={(e) => dispatch(changeSearchTerm(e.target.value))}
+          placeholder="Search Groceries"
+        />
+        <button type="submit" onClick={searchProduct}>
+          <SearchIcon />
+        </button>
       </Search>
     </SearchBarContainer>
   );
