@@ -1,13 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import { PageMapContainer, HomeIcon } from "./PageMap.styles";
+import { PageMapContainer, HomeIcon, Arrow } from "./PageMap.styles";
 
-interface Props {}
+interface Props {
+  pageName?: string;
+}
 
 const PageMap = (props: Props) => {
   return (
     <PageMapContainer>
-      <HomeIcon />
+      <Link
+        to="/"
+        style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+      >
+        <HomeIcon />
+      </Link>
+
+      <Arrow />
+      <p>{props.pageName}</p>
     </PageMapContainer>
   );
 };

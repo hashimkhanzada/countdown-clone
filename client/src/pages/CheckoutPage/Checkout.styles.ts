@@ -51,6 +51,12 @@ export const DeliveryRow = styled.div`
     border: solid 1px #889ca8;
     border-radius: 5px;
     color: #39464e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 120, 55, 0.1);
+    }
 
     p {
       font-size: 20px;
@@ -119,6 +125,11 @@ export const TimeslotRow = styled.div`
     border-radius: 5px;
     color: #39464e;
     cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 120, 55, 0.1);
+    }
 
     p {
       font-size: 20px;

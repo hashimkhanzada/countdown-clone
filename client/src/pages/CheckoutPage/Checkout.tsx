@@ -1,6 +1,9 @@
 import React from "react";
 import { FiTruck } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { Button } from "../../styles/globalStyles";
+import { Link } from "react-router-dom";
 
 import {
   CheckoutContainer,
@@ -9,9 +12,12 @@ import {
   DeliveryRow,
   TimeslotRow,
 } from "./Checkout.styles";
-import { Button } from "../../styles/globalStyles";
+
+import { selectDelivery } from "../../features/delivery/deliverySlice";
 
 const Checkout = () => {
+  const deliveryAddress = useSelector(selectDelivery);
+
   return (
     <CheckoutContainer>
       <CheckoutMain>
@@ -34,8 +40,7 @@ const Checkout = () => {
             <div className="address">
               <h4>Deliver to:</h4>
               <span>
-                <strong>Durie Hill, Whanganui 4500</strong>{" "}
-                <p>Change address {">"}</p>
+                <strong>{deliveryAddress}</strong>
               </span>
             </div>
           </DeliveryRow>
@@ -70,9 +75,15 @@ const Checkout = () => {
             </div>
           </TimeslotRow>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button propWidth="20%" extraMargin="40px 10px">
-              Continue
-            </Button>
+            <Link
+              to="/payment"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button propPadding="8px 24px" extraMargin="40px 10px">
+                {" "}
+                Continue
+              </Button>{" "}
+            </Link>
           </div>
         </MainContainer>
       </CheckoutMain>

@@ -22,29 +22,56 @@ import {
   selectSubTotal,
 } from "../../features/cart/cartSlice";
 
+import {
+  changeDeliveryAddress,
+  selectDelivery,
+} from "../../features/delivery/deliverySlice";
+
 interface Props {}
 
 const SearchSection = (props: Props) => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const subTotal = useSelector(selectSubTotal);
+  const deliveryAddress = useSelector(selectDelivery);
 
-  const [deliveryCity, setDeliveryCity] = useState("Glenfield");
+  const [isVisible, setIsVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     dispatch(calculateSubTotal());
   }, [cart]);
 
+  useEffect(() => {
+    console.log(deliveryAddress);
+  }, [deliveryAddress]);
+
   const changeCity = () => {
-    console.log("city change");
+    dispatch(changeDeliveryAddress(inputValue));
   };
 
   return (
     <SearchSectionContainer>
       <DeliveryRow>
         <TruckIcon />
-        <p>Delivery:</p> {deliveryCity}{" "}
-        <span onClick={changeCity}>Change {">"}</span>
+        <p>Delivery:</p> {deliveryAddress}{" "}
+        {isVisible ? (
+          <div className="address">
+            <h3>Enter your address:</h3>
+            <input onChange={(e: any) => setInputValue(e.target.value)} />
+            <Button
+              propPadding="5px 15px"
+              onClick={() => {
+                changeCity();
+                setIsVisible(false);
+              }}
+            >
+              Confirm
+            </Button>
+          </div>
+        ) : (
+          <span onClick={() => setIsVisible(true)}>Change {">"}</span>
+        )}
       </DeliveryRow>
 
       <SearchRow>

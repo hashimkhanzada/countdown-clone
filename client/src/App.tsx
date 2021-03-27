@@ -16,7 +16,6 @@ function App() {
       <GlobalStyle />
       <Navbar />
       <SearchSection />
-      <PageMap />
 
       <Switch>
         <Route path="/" exact component={Home} />

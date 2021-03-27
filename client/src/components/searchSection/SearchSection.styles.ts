@@ -14,6 +14,8 @@ export const DeliveryRow = styled.div`
   font-size: 14px;
   color: #39464e;
   padding: 12px 16px 0;
+  position: relative;
+
   p {
     padding: 0 8px;
     font-weight: bolder;
@@ -26,6 +28,26 @@ export const DeliveryRow = styled.div`
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  .address {
+    background: white;
+    border: solid 3px black;
+    border-radius: 5px;
+    padding: 25px 40px;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    width: 30%;
+
+    > * {
+      margin: 5px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 3px;
     }
   }
 `;

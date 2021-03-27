@@ -19,6 +19,7 @@ import {
   ProductsContainer,
   PaginationContainer,
 } from "./Browse.styles";
+import PageMap from "../../components/pageMap/PageMap";
 
 interface ProductInfo {
   _id?: string;
@@ -124,89 +125,97 @@ const Browse = ({ match }: any) => {
   }, [match, searchValue]);
 
   return (
-    <BrowseMain>
-      <BrowseContainer>
-        <CategoryColumn>
-          <h3>Categories</h3>
-          {searchValue
-            ? categoryData?.map(({ categoryName, numberOfItems }) => {
+    <>
+      {searchValue ? (
+        <PageMap pageName="Search Results" />
+      ) : (
+        <PageMap pageName={match.params.mainCategory} />
+      )}
+
+      <BrowseMain>
+        <BrowseContainer>
+          <CategoryColumn>
+            <h3>Categories</h3>
+            {searchValue
+              ? categoryData?.map(({ categoryName, numberOfItems }) => {
+                  return (
+                    <p key={categoryName}>
+                      {categoryName} ({numberOfItems})
+                    </p>
+                  );
+                })
+              : subCategory?.map(({ subCategoryName, numberOfItems }) => {
+                  return (
+                    <p key={subCategoryName}>
+                      {subCategoryName} ({numberOfItems})
+                    </p>
+                  );
+                })}
+          </CategoryColumn>
+          <ProductColumn>
+            <HeadingContainer>
+              {searchValue ? (
+                <h1>Results for "{searchValue}"</h1>
+              ) : (
+                <h1>{match.params.mainCategory}</h1>
+              )}
+
+              <span>{productData?.length} items</span>
+            </HeadingContainer>
+            <FilterContainer>
+              <p>Sort by:</p>
+              <select>
+                <option value="">Relevance</option>
+              </select>
+            </FilterContainer>
+            <ProductsContainer>
+              {productData?.map((data: ProductInfo) => {
                 return (
-                  <p key={categoryName}>
-                    {categoryName} ({numberOfItems})
-                  </p>
-                );
-              })
-            : subCategory?.map(({ subCategoryName, numberOfItems }) => {
-                return (
-                  <p key={subCategoryName}>
-                    {subCategoryName} ({numberOfItems})
-                  </p>
+                  <ProductCard
+                    key={data._id}
+                    _id={data._id}
+                    name={data.name}
+                    subCategory={data.subCategory}
+                    claims={data.claims}
+                    decimalPrice={data.decimalPrice}
+                    image={data.image}
+                    ingredients={data.ingredients}
+                    isOnSale={data.isOnSale}
+                    madeIn={data.madeIn}
+                    mainCategory={data.mainCategory}
+                    originalPrice={data.originalPrice}
+                    pricePerSpecificUnit={data.pricePerSpecificUnit}
+                    saleType={data.saleType}
+                    specificUnit={data.specificUnit}
+                    totalPrice={data.totalPrice}
+                    weight={data.weight}
+                    weightUnit={data.weightUnit}
+                  />
                 );
               })}
-        </CategoryColumn>
-        <ProductColumn>
-          <HeadingContainer>
-            {searchValue ? (
-              <h1>Results for "{searchValue}"</h1>
-            ) : (
-              <h1>{match.params.mainCategory}</h1>
-            )}
-
-            <span>{productData?.length} items</span>
-          </HeadingContainer>
-          <FilterContainer>
-            <p>Sort by:</p>
-            <select>
-              <option value="">Relevance</option>
-            </select>
-          </FilterContainer>
-          <ProductsContainer>
-            {productData?.map((data: ProductInfo) => {
-              return (
-                <ProductCard
-                  key={data._id}
-                  _id={data._id}
-                  name={data.name}
-                  subCategory={data.subCategory}
-                  claims={data.claims}
-                  decimalPrice={data.decimalPrice}
-                  image={data.image}
-                  ingredients={data.ingredients}
-                  isOnSale={data.isOnSale}
-                  madeIn={data.madeIn}
-                  mainCategory={data.mainCategory}
-                  originalPrice={data.originalPrice}
-                  pricePerSpecificUnit={data.pricePerSpecificUnit}
-                  saleType={data.saleType}
-                  specificUnit={data.specificUnit}
-                  totalPrice={data.totalPrice}
-                  weight={data.weight}
-                  weightUnit={data.weightUnit}
-                />
-              );
-            })}
-          </ProductsContainer>
-          <PaginationContainer>
-            <PaginationBar
-              itemsPerPage={itemsPerPage}
-              totalItems={totalItems}
-              selectedPage={currentPage}
-              onPageChange={(e: any) => {
-                setCurrentPage(e.target.id);
-              }}
-              nextPage={() => {
-                setCurrentPage(!isLastPage ? +currentPage + 1 : currentPage);
-              }}
-              prevPage={() => {
-                setCurrentPage(!isFirstPage ? +currentPage - 1 : currentPage);
-              }}
-              isFirstPage={isFirstPage}
-              isLastPage={isLastPage}
-            />
-          </PaginationContainer>
-        </ProductColumn>
-      </BrowseContainer>
-    </BrowseMain>
+            </ProductsContainer>
+            <PaginationContainer>
+              <PaginationBar
+                itemsPerPage={itemsPerPage}
+                totalItems={totalItems}
+                selectedPage={currentPage}
+                onPageChange={(e: any) => {
+                  setCurrentPage(e.target.id);
+                }}
+                nextPage={() => {
+                  setCurrentPage(!isLastPage ? +currentPage + 1 : currentPage);
+                }}
+                prevPage={() => {
+                  setCurrentPage(!isFirstPage ? +currentPage - 1 : currentPage);
+                }}
+                isFirstPage={isFirstPage}
+                isLastPage={isLastPage}
+              />
+            </PaginationContainer>
+          </ProductColumn>
+        </BrowseContainer>
+      </BrowseMain>
+    </>
   );
 };
 
