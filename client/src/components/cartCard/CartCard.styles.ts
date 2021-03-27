@@ -4,6 +4,11 @@ export const CartItemContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  border-bottom: solid 1px #cde1f8;
+
+  @media screen and (max-width: 1030px) {
+    flex-direction: column;
+  }
 `;
 
 export const Col1 = styled.div`
@@ -42,7 +47,7 @@ export const Col3 = styled.div`
   align-items: center;
   justify-content: center;
   flex: 0.2;
-  background-color: lightgray;
+  background-color: #e9f2fc;
 
   > * {
     padding: 12px 16px;

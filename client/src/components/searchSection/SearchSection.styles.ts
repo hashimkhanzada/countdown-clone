@@ -75,13 +75,6 @@ export const CheckOutCol = styled(Link)`
   color: #535e65;
   justify-content: flex-end;
   text-decoration: none;
-  transition: all 0.1s ease;
-
-  &:hover {
-    > button {
-      transform: scale(1.05);
-    }
-  }
 
   span {
     @media screen and (max-width: 1030px) {

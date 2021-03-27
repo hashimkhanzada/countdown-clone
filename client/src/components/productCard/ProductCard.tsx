@@ -8,7 +8,6 @@ import {
   incrementCart,
   decrementCart,
   selectCart,
-  removeFromCart,
 } from "../../features/cart/cartSlice";
 
 import {

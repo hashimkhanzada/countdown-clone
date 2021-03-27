@@ -3,14 +3,22 @@ import CartCard from "../../components/cartCard/CartCard";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
-  incrementCart,
-  decrementCart,
   selectCart,
+  clearCart,
+  selectSubTotal,
 } from "../../features/cart/cartSlice";
 
-import { CartContainer, CartMain } from "./Cart.styles";
-
-interface Props {}
+import {
+  CartContainer,
+  CartMain,
+  TitleRow,
+  TotalCostRow,
+  Cost,
+  Total,
+  CheckOutRow,
+} from "./Cart.styles";
+import { Button } from "../../styles/globalStyles";
+import { Link } from "react-router-dom";
 
 interface ProductInfo {
   _id?: string;
@@ -32,16 +40,22 @@ interface ProductInfo {
   weightUnit?: string;
 }
 
-const Cart = (props: Props) => {
+const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
+  const subTotal = useSelector(selectSubTotal);
+  const [deliveryFee, setDeliveryFee] = useState(14);
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  const clearTrolley = () => {
+    dispatch(clearCart());
+  };
 
   return (
     <CartContainer>
+      <TitleRow>
+        <h1>Trolley</h1>
+        <h2>{cart.length} items</h2>
+      </TitleRow>
       <CartMain>
         {cart?.map((data: ProductInfo) => {
           return (
@@ -67,7 +81,34 @@ const Cart = (props: Props) => {
             />
           );
         })}
+        <TotalCostRow>
+          <Cost>
+            <p>Delivery fee</p>
+            <p>${deliveryFee.toFixed(2)}</p>
+          </Cost>
+          <Cost>
+            <p>Subtotal</p>
+            <p>${subTotal}</p>
+          </Cost>
+          <Total>
+            <h1>Total (incl. GST)</h1>
+            <h1>${(+subTotal + deliveryFee).toFixed(2)}</h1>
+          </Total>
+        </TotalCostRow>
       </CartMain>
+
+      <CheckOutRow>
+        <Button
+          onClick={clearTrolley}
+          style={{ background: "#c20e1a" }}
+          propPadding="8px 32px"
+        >
+          Clear Trolley
+        </Button>
+        <Link to="/checkout" style={{ textDecoration: "none" }}>
+          <Button propPadding="8px 32px">Checkout</Button>
+        </Link>
+      </CheckOutRow>
     </CartContainer>
   );
 };

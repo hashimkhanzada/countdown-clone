@@ -18,6 +18,7 @@ interface ButtonProps {
   propWidth?: string;
   hideMobile?: boolean;
   maxWidthMobile?: boolean;
+  propPadding?: string;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -33,7 +34,8 @@ export const Button = styled.button<ButtonProps>`
   outline: none;
   border: none;
   cursor: pointer;
-  margin: ${({ extraMargin }) => extraMargin && extraMargin};
+  margin: ${({ extraMargin }) => extraMargin};
+  padding: ${({ propPadding }) => propPadding};
   width: ${({ propWidth }) => propWidth};
   transition: all 0.3s ease-out;
 

@@ -16,23 +16,23 @@ import {
   CheckOutIcon,
 } from "./SearchSection.styles";
 
-import { selectCart } from "../../features/cart/cartSlice";
+import {
+  selectCart,
+  calculateSubTotal,
+  selectSubTotal,
+} from "../../features/cart/cartSlice";
 
 interface Props {}
 
 const SearchSection = (props: Props) => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
+  const subTotal = useSelector(selectSubTotal);
+
   const [deliveryCity, setDeliveryCity] = useState("Glenfield");
-  const [totalPrice, setTotalPrice] = useState("0.00");
 
   useEffect(() => {
-    let totalPricee = 0;
-    cart.forEach((el: any) => {
-      totalPricee += (el.totalPrice / 100) * el.quantity;
-    });
-
-    setTotalPrice(totalPricee.toFixed(2));
+    dispatch(calculateSubTotal());
   }, [cart]);
 
   const changeCity = () => {
@@ -58,7 +58,7 @@ const SearchSection = (props: Props) => {
         <div style={{ display: "flex", flex: "1", justifyContent: "flex-end" }}>
           <CheckOutCol to="/reviewcart">
             <CheckOutIcon />
-            <span>{cart?.length} items - </span>${totalPrice}
+            <span>{cart?.length} items - </span>${subTotal}
             <Button extraMargin="0 16px" hideMobile>
               Checkout
             </Button>

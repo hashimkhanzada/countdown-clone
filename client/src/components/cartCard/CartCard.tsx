@@ -16,6 +16,7 @@ import {
   incrementCart,
   decrementCart,
   selectCart,
+  removeFromCart,
 } from "../../features/cart/cartSlice";
 import { Button } from "../../styles/globalStyles";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -44,17 +45,15 @@ const CartCard = (props: Props) => {
   const dispatch = useDispatch();
   const [numberSelected, setNumberSelected] = useState(1);
   const cart = useSelector(selectCart);
-  const [isInCart, setIsInCart] = useState(false);
   const [totalPrice, setTotalPrice] = useState("0.00");
 
   const addToCart = () => {
     let cartData = { selectedProduct: props };
 
-    setIsInCart(true);
     dispatch(incrementCart(cartData));
   };
 
-  const removeFromCart = () => {
+  const decrementQuantity = () => {
     const { _id } = props;
     let cartData = {
       selectedProduct: {
@@ -65,13 +64,15 @@ const CartCard = (props: Props) => {
     dispatch(decrementCart(cartData));
   };
 
+  const clearCartItem = () => {
+    dispatch(removeFromCart(props._id));
+  };
+
   useEffect(() => {
     cart.forEach((cartItem: any) => {
       if (cartItem._id === props._id) {
         setNumberSelected(cartItem.quantity);
         setTotalPrice(cartItem.calculatedPrice.toFixed(2));
-
-        cartItem.quantity === 0 ? setIsInCart(false) : setIsInCart(true);
       }
     });
   }, [cart]);
@@ -97,14 +98,18 @@ const CartCard = (props: Props) => {
       <Col2>
         <QuantityCol>
           <input value={numberSelected} readOnly />
-          <Button className="remove" onClick={removeFromCart} propWidth="40%">
+          <Button
+            className="remove"
+            onClick={decrementQuantity}
+            propWidth="40%"
+          >
             <AiOutlineMinus />
           </Button>
           <Button className="add" onClick={addToCart} propWidth="40%">
             <AiOutlinePlus />
           </Button>
         </QuantityCol>
-        <p>Remove</p>
+        <p onClick={clearCartItem}>Remove</p>
       </Col2>
       <Col3>
         <TotalCol>${totalPrice}</TotalCol>

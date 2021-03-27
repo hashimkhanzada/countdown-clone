@@ -4,6 +4,7 @@ import { AppThunk, RootState } from "../../app/store";
 
 interface CartState {
   cartItems: any;
+  subTotal: any;
 }
 
 interface Cart {
@@ -22,6 +23,7 @@ interface Cart {
 
 const initialState: CartState = {
   cartItems: [],
+  subTotal: 0,
 };
 
 export const cartSlice = createSlice({
@@ -63,7 +65,7 @@ export const cartSlice = createSlice({
 
           if (cp.quantity === 0) {
             const newArr = state.cartItems.filter(
-              (item: Cart) => item._id != action.payload.selectedProduct._id
+              (item: Cart) => item._id !== action.payload.selectedProduct._id
             );
 
             state.cartItems = [...newArr];
@@ -73,10 +75,23 @@ export const cartSlice = createSlice({
     },
     removeFromCart: (state, action: PayloadAction<any>) => {
       const newArr = state.cartItems.filter(
-        (item: Cart) => item._id != action.payload
+        (item: Cart) => item._id !== action.payload
       );
 
       state.cartItems = [...newArr];
+    },
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
+    calculateSubTotal: (state) => {
+      const cartItems = state.cartItems;
+      let subTotal = 0;
+
+      cartItems.forEach((element: Cart) => {
+        subTotal += (element.totalPrice / 100) * element.quantity;
+      });
+
+      state.subTotal = subTotal.toFixed(2);
     },
   },
 });
@@ -85,11 +100,14 @@ export const {
   incrementCart,
   decrementCart,
   removeFromCart,
+  clearCart,
+  calculateSubTotal,
 } = cartSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectCart = (state: RootState) => state.cart.cartItems;
+export const selectSubTotal = (state: RootState) => state.cart.subTotal;
 
 export default cartSlice.reducer;
