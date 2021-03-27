@@ -29,7 +29,7 @@ export const createAPIEndpoint = (endpoint: String) => {
       axios.get(`${url}/${subCategory}/subcategory`),
 
     fetchMainCategoryData: (searchTerm: String) =>
-      axios.get(`${url}/a?searchTerm=${searchTerm}`),
+      axios.get(`${url}/category?searchTerm=${searchTerm}`),
 
     fetchBySearch: (
       searchTerm: String,

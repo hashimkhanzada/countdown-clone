@@ -70,7 +70,7 @@ export const getProductsBySearch = async (req: Request, res: Response) => {
       .limit(limit)
       .skip(startIndex);
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ message: err });
   }
 
   res.send({ results: results, totalProducts: productCount });
@@ -109,7 +109,7 @@ export const getProductByMainCategory = async (req: Request, res: Response) => {
       .limit(limit)
       .skip(startIndex);
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ message: err });
   }
 
   res.send({ results: results, totalProducts: productCount });

@@ -35,6 +35,7 @@ export const CategoryColumn = styled.div`
     color: #007837;
     margin-bottom: 8px;
     cursor: pointer;
+    text-transform: capitalize;
     transition: all 0.1s ease-out;
 
     &:hover {
@@ -59,6 +60,8 @@ export const HeadingContainer = styled.div`
   align-items: center;
   margin-bottom: 18px;
   h1 {
+    margin: 10px;
+    text-transform: capitalize;
     @media screen and (max-width: 1030px) {
       font-size: 25px;
     }
@@ -77,8 +80,9 @@ export const HeadingContainer = styled.div`
 
 export const FilterContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
+  margin-left: 10px;
   margin-bottom: 20px;
 
   p {

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeSearchTerm,
   selectSearch,
-  searchClicked,
 } from "../../features/search/searchSlice";
 
 import {
@@ -20,14 +19,8 @@ const SearchBar = (props: Props) => {
   const dispatch = useDispatch();
   const searchValue = useSelector(selectSearch);
 
-  useEffect(() => {
-    console.log(searchValue);
-  }, [searchValue]);
-
   const searchProduct = (e: any) => {
     e.preventDefault();
-    if (searchValue) {
-    }
   };
 
   return (

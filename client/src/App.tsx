@@ -7,7 +7,6 @@ import PageMap from "./components/pageMap/PageMap";
 import Home from "./pages/HomePage/Home";
 import Browse from "./pages/BrowsePage/Browse";
 import Product from "./pages/ProductPage/Product";
-import SearchPage from "./pages/SearchPage/Search";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
 
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/Search" exact component={SearchPage} />
         <Route path="/product/:id" exact component={Product} />
         <Route path="/browse/:mainCategory" exact component={Browse} />
       </Switch>

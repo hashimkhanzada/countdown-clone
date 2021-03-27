@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PaginationBar from "../../components/paginationBar/PaginationBar";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  changeSearchTerm,
+  selectSearch,
+} from "../../features/search/searchSlice";
 
 import {
   BrowseContainer,
@@ -36,12 +42,20 @@ interface ProductInfo {
 
 const Browse = ({ match }: any) => {
   const [productData, setProductData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLastPage, setIsLastPage] = useState(true);
   const [isFirstPage, setIsFirstPage] = useState(true);
+
+  const searchValue = useSelector(selectSearch);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(changeSearchTerm(""));
+  }, [match]);
 
   useEffect(() => {
     const GetData = async () => {
@@ -66,8 +80,26 @@ const Browse = ({ match }: any) => {
         .catch((err) => console.log(err));
     };
 
-    GetData();
-  }, [match, currentPage]);
+    const GetSearchData = async () => {
+      await createAPIEndpoint(ENDPOINTS.SEARCHPRODUCT)
+        .fetchBySearch(searchValue, currentPage, itemsPerPage)
+        .then((response: any) => {
+          setProductData(response.data.results.paginatedProducts);
+          setTotalItems(response.data.totalProducts);
+
+          response.data.results.next.page
+            ? setIsLastPage(false)
+            : setIsLastPage(true);
+
+          response.data.results.previous.page
+            ? setIsFirstPage(false)
+            : setIsFirstPage(true);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    searchValue ? GetSearchData() : GetData();
+  }, [match, currentPage, searchValue]);
 
   useEffect(() => {
     const GetSubData = async () => {
@@ -79,25 +111,47 @@ const Browse = ({ match }: any) => {
         .catch((err) => console.log(err));
     };
 
-    GetSubData();
-  }, [match]);
+    const GetCategoryData = async () => {
+      await createAPIEndpoint(ENDPOINTS.SEARCHPRODUCT)
+        .fetchMainCategoryData(searchValue)
+        .then((response: any) => {
+          setCategoryData(response.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    searchValue ? GetCategoryData() : GetSubData();
+  }, [match, searchValue]);
 
   return (
     <BrowseMain>
       <BrowseContainer>
         <CategoryColumn>
           <h3>Categories</h3>
-          {subCategory?.map(({ subCategoryName, numberOfItems }) => {
-            return (
-              <p key={subCategoryName}>
-                {subCategoryName} ({numberOfItems})
-              </p>
-            );
-          })}
+          {searchValue
+            ? categoryData?.map(({ categoryName, numberOfItems }) => {
+                return (
+                  <p key={categoryName}>
+                    {categoryName} ({numberOfItems})
+                  </p>
+                );
+              })
+            : subCategory?.map(({ subCategoryName, numberOfItems }) => {
+                return (
+                  <p key={subCategoryName}>
+                    {subCategoryName} ({numberOfItems})
+                  </p>
+                );
+              })}
         </CategoryColumn>
         <ProductColumn>
           <HeadingContainer>
-            <h1>Fruits {"&"} Veg</h1>
+            {searchValue ? (
+              <h1>Results for "{searchValue}"</h1>
+            ) : (
+              <h1>{match.params.mainCategory}</h1>
+            )}
+
             <span>{productData?.length} items</span>
           </HeadingContainer>
           <FilterContainer>

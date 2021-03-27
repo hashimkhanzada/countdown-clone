@@ -18,7 +18,7 @@ router.get("/", expressAsyncHandler(getProducts));
 router.get("/seed", expressAsyncHandler(seedProducts));
 
 router.get("/search", expressAsyncHandler(getProductsBySearch));
-router.get("/search/a", expressAsyncHandler(getMainCategoryData));
+router.get("/search/category", expressAsyncHandler(getMainCategoryData));
 
 router.get(
   "/browse/:mainCategory/data",
