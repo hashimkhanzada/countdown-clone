@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FiTruck } from "react-icons/fi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { IoCartOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export const SearchSectionContainer = styled.div`
   box-shadow: 0 5px 5px 0 rgb(0 0 0 / 15%);
@@ -68,12 +69,19 @@ export const ShoppingList = styled.div`
   }
 `;
 
-export const CheckOutCol = styled.div`
+export const CheckOutCol = styled(Link)`
   display: flex;
   align-items: center;
   color: #535e65;
-  flex: 1;
   justify-content: flex-end;
+  text-decoration: none;
+  transition: all 0.1s ease;
+
+  &:hover {
+    > button {
+      transform: scale(1.05);
+    }
+  }
 
   span {
     @media screen and (max-width: 1030px) {

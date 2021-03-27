@@ -7,10 +7,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import {
   incrementCart,
   decrementCart,
-  addToCartByAmount,
-  incrementAsync,
   selectCart,
-  changeCartCount,
   removeFromCart,
 } from "../../features/cart/cartSlice";
 
@@ -63,7 +60,6 @@ const ProductCard = (props: Props) => {
       selectedProduct: {
         _id,
       },
-      count: numberSelected,
     };
 
     dispatch(decrementCart(cartData));

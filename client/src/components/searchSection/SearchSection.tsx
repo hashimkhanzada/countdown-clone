@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../controls/searchBar/SearchBar";
 import { Button } from "../../styles/globalStyles";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
   SearchSectionContainer,
@@ -20,6 +21,7 @@ import { selectCart } from "../../features/cart/cartSlice";
 interface Props {}
 
 const SearchSection = (props: Props) => {
+  const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const [deliveryCity, setDeliveryCity] = useState("Glenfield");
   const [totalPrice, setTotalPrice] = useState("0.00");
@@ -53,14 +55,15 @@ const SearchSection = (props: Props) => {
             Shopping list
           </ShoppingList>
         </SearchBarCol>
-
-        <CheckOutCol>
-          <CheckOutIcon />
-          <span>{cart?.length} items - </span>${totalPrice}
-          <Button extraMargin="0 16px" hideMobile>
-            Checkout
-          </Button>
-        </CheckOutCol>
+        <div style={{ display: "flex", flex: "1", justifyContent: "flex-end" }}>
+          <CheckOutCol to="/reviewcart">
+            <CheckOutIcon />
+            <span>{cart?.length} items - </span>${totalPrice}
+            <Button extraMargin="0 16px" hideMobile>
+              Checkout
+            </Button>
+          </CheckOutCol>
+        </div>
       </SearchRow>
     </SearchSectionContainer>
   );
