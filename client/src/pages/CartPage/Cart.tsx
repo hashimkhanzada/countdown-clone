@@ -109,7 +109,7 @@ const Cart = () => {
             Clear Trolley
           </Button>
           <Link to="/checkout" style={{ textDecoration: "none" }}>
-            <Button propPadding="8px 32px">Checkout</Button>
+            <Button propPadding="8px 32px">Continue</Button>
           </Link>
         </CheckOutRow>
       </CartContainer>
