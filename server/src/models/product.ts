@@ -1,14 +1,41 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
+
+interface IProduct extends Document {
+  name?: any;
+  image?: string;
+  weightUnit?: string;
+  weight?: number;
+  specificUnit?: string;
+  pricePerSpecificUnit?: string;
+  totalPrice?: number;
+  originalPrice?: string;
+  decimalPrice?: string;
+  salePrice?: number;
+  saveAmount?: number;
+  madeIn?: string;
+  ingredients?: string;
+  description?: string;
+  nutritionalInfo?: string;
+  claims?: string;
+  allergenWarnings?: string;
+  endorsements?: string;
+  isOnSale?: boolean;
+  countInStock?: number;
+  subCategory?: string;
+  mainCategory?: string;
+  saleType?: [string];
+}
 
 const productSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true, trim: true },
-    image: { type: String, required: true },
+    description: { type: String },
+    name: { type: String },
+    image: { type: String },
 
     weightUnit: { type: String, default: "g" },
-    weight: { type: Number, required: true },
-    specificUnit: { type: String, required: true },
-    pricePerSpecificUnit: { type: String, required: true },
+    weight: { type: Number },
+    specificUnit: { type: String },
+    pricePerSpecificUnit: { type: String },
 
     totalPrice: { type: Number },
 
@@ -18,15 +45,14 @@ const productSchema = new mongoose.Schema(
     saveAmount: { type: Number },
 
     madeIn: { type: String },
-    description: { type: String },
     ingredients: { type: String },
     nutritionalInfo: { type: String },
     claims: { type: String },
     allergenWarnings: { type: String },
     endorsements: { type: String },
 
-    mainCategory: { type: String, required: true },
-    subCategory: { type: String, required: true },
+    mainCategory: { type: String },
+    subCategory: { type: String },
     countInStock: { type: Number },
     isOnSale: { type: Boolean, default: false },
     saleType: [String],
@@ -35,6 +61,6 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model<IProduct>("Product", productSchema);
 
 export default Product;

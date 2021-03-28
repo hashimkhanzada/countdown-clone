@@ -172,7 +172,7 @@ export const getSubCategoryData = async (req: Request, res: Response) => {
 };
 
 export const seedProducts = async (req: Request, res: Response) => {
-  // await Product.remove({});
-  // const createdProducts = await Product.insertMany(data);
-  res.send("asd");
+  await Product.remove({});
+  const createdProducts = await Product.insertMany(data);
+  res.send({ createdProducts });
 };
