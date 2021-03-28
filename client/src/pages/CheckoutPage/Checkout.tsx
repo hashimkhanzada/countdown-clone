@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiTruck } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -18,6 +18,9 @@ import { selectDelivery } from "../../features/delivery/deliverySlice";
 const Checkout = () => {
   const deliveryAddress = useSelector(selectDelivery);
 
+  const [deliveryType, setDeliveryType] = useState("Delivery");
+  const [dayId, setDayId] = useState("Monday");
+
   return (
     <CheckoutContainer>
       <CheckoutMain>
@@ -28,11 +31,19 @@ const Checkout = () => {
               <h3>Delivery or Pick up?</h3>
             </div>
             <div style={{ display: "flex", margin: "20px 0" }}>
-              <button className="selected">
+              <button
+                onClick={() => setDeliveryType("Delivery")}
+                name="Delivery"
+                className={deliveryType === "Delivery" ? "selected" : ""}
+              >
                 <FiTruck />
                 <p>Delivery</p>
               </button>
-              <button>
+              <button
+                onClick={() => setDeliveryType("Pickup")}
+                name="Pickup"
+                className={deliveryType === "Pickup" ? "selected" : ""}
+              >
                 <BsBag />
                 <p>Pickup</p>
               </button>
@@ -57,19 +68,39 @@ const Checkout = () => {
             </div>
             <p style={{ marginLeft: "10px" }}>Next available slot:</p>
             <div style={{ display: "flex", margin: "5px 0" }}>
-              <button className="selected">
+              <button
+                onClick={() => setDayId("Monday")}
+                name="Monday"
+                className={dayId === "Monday" ? "selected" : ""}
+              >
                 <p>Monday</p>
               </button>
-              <button>
+              <button
+                onClick={() => setDayId("Tuesday")}
+                name="Tuesday"
+                className={dayId === "Tuesday" ? "selected" : ""}
+              >
                 <p>Tuesday</p>
               </button>
-              <button>
+              <button
+                onClick={() => setDayId("Wednesday")}
+                name="Wednesday"
+                className={dayId === "Wednesday" ? "selected" : ""}
+              >
                 <p>Wednesday</p>
               </button>
-              <button>
+              <button
+                onClick={() => setDayId("Thursday")}
+                name="Thursday"
+                className={dayId === "Thursday" ? "selected" : ""}
+              >
                 <p>Thursday</p>
               </button>
-              <button>
+              <button
+                onClick={() => setDayId("Friday")}
+                name="Friday"
+                className={dayId === "Friday" ? "selected" : ""}
+              >
                 <p>Friday</p>
               </button>
             </div>

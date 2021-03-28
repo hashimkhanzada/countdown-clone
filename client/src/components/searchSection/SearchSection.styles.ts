@@ -15,6 +15,7 @@ export const DeliveryRow = styled.div`
   color: #39464e;
   padding: 12px 16px 0;
   position: relative;
+  text-transform: capitalize;
 
   p {
     padding: 0 8px;

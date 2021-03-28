@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PaginationBar from "../../components/paginationBar/PaginationBar";
-import { useSelector, useDispatch } from "react-redux";
 
+import { useSelector, useDispatch } from "react-redux";
 import {
   changeSearchTerm,
   selectSearch,

@@ -36,7 +36,7 @@ const SearchSection = (props: Props) => {
   const deliveryAddress = useSelector(selectDelivery);
 
   const [isVisible, setIsVisible] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(deliveryAddress);
 
   useEffect(() => {
     dispatch(calculateSubTotal());
@@ -56,19 +56,29 @@ const SearchSection = (props: Props) => {
         <TruckIcon />
         <p>Delivery:</p> {deliveryAddress}{" "}
         {isVisible ? (
-          <div className="address">
+          <form className="address">
             <h3>Enter your address:</h3>
-            <input onChange={(e: any) => setInputValue(e.target.value)} />
+            <input
+              value={inputValue}
+              onChange={(e: any) => {
+                setInputValue(e.target.value);
+              }}
+            />
             <Button
               propPadding="5px 15px"
               onClick={() => {
-                changeCity();
-                setIsVisible(false);
+                if (inputValue) {
+                  changeCity();
+                  setIsVisible(false);
+                } else {
+                  setIsVisible(false);
+                }
               }}
+              type="submit"
             >
               Confirm
             </Button>
-          </div>
+          </form>
         ) : (
           <span onClick={() => setIsVisible(true)}>Change {">"}</span>
         )}

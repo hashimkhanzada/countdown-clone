@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "../../styles/globalStyles";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
+import { useSelector, useDispatch } from "react-redux";
 import {
   incrementCart,
   decrementCart,
   selectCart,
+  removeFromCart,
 } from "../../features/cart/cartSlice";
 
 import {
@@ -42,7 +43,7 @@ interface Props {
 
 const ProductCard = (props: Props) => {
   const dispatch = useDispatch();
-  const [numberSelected, setNumberSelected] = useState(1);
+  const [numberSelected, setNumberSelected] = useState(0);
   const cart = useSelector(selectCart);
   const [isInCart, setIsInCart] = useState(false);
 
@@ -61,6 +62,9 @@ const ProductCard = (props: Props) => {
       },
     };
 
+    if (numberSelected === 1) {
+      setIsInCart(false);
+    }
     dispatch(decrementCart(cartData));
   };
 
@@ -68,8 +72,6 @@ const ProductCard = (props: Props) => {
     cart.forEach((cartItem: any) => {
       if (cartItem._id === props._id) {
         setNumberSelected(cartItem.quantity);
-
-        cartItem.quantity === 0 ? setIsInCart(false) : setIsInCart(true);
       }
     });
   }, [cart]);
@@ -107,10 +109,7 @@ const ProductCard = (props: Props) => {
       <ProductButton>
         {isInCart ? (
           <>
-            <input
-              value={numberSelected}
-              onChange={(e: any) => setNumberSelected(e.target.value)}
-            />
+            <input value={numberSelected} readOnly />
             <Button className="remove" onClick={removeFromCart} propWidth="50%">
               <AiOutlineMinus />
             </Button>

@@ -125,7 +125,7 @@ export const TimeslotRow = styled.div`
     border-radius: 5px;
     color: #39464e;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 
     &:hover {
       background-color: rgba(0, 120, 55, 0.1);
