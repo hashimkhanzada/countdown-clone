@@ -90,6 +90,7 @@ const DropDownContainer = styled.ul<{ click: Boolean }>`
   justify-content: space-between;
   cursor: default;
   border-bottom: solid 4px #007837;
+  z-index: 999;
 `;
 
 const DropDownItem = styled.li``;

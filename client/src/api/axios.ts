@@ -6,6 +6,8 @@ export const ENDPOINTS = {
   PRODUCTS: "products",
   SEARCHPRODUCT: "products/search",
   BROWSE: "products/browse",
+  USERS: "users",
+  ORDERS: "orders",
 };
 
 export const createAPIEndpoint = (endpoint: String) => {
@@ -39,5 +41,32 @@ export const createAPIEndpoint = (endpoint: String) => {
       axios.get(
         `${url}?searchTerm=${searchTerm}&page=${currentPage}&limit=${listLimit}`
       ),
+
+    userSignIn: (formData: { email: String; password: String }) => {
+      const data = axios.post(`${url}/signin`, formData);
+      return data;
+    },
+
+    userRegister: (formData: {
+      firstName: String;
+      lastName: String;
+      email: String;
+      password: String;
+      address: String;
+    }) => {
+      const data = axios.post(`${url}/signup`, formData);
+      return data;
+    },
+
+    createNewOrder: (orderData: any) => {
+      const data = axios.post(`${url}`, orderData, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("profile") || "{}").token
+          }`,
+        },
+      });
+      return data;
+    },
   };
 };

@@ -1,16 +1,26 @@
 import mongoose, { Document } from "mongoose";
 
 interface IOrder extends Document {
-  firstName: string;
+  orderItems: [
+    {
+      quantity: number;
+      productSubTotal: number;
+      productImage: string;
+      product: string;
+    }
+  ];
+  user: string;
+  totalPrice: number;
+  address: string;
 }
 
 const orderSchema = new mongoose.Schema(
   {
     orderItems: [
       {
-        productName: { type: String, required: true },
         quantity: { type: Number, required: true },
-        price: { type: Number, required: true },
+        productSubTotal: { type: Number, required: true },
+        productImage: { type: String },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
@@ -21,6 +31,14 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    address: {
+      type: String,
       required: true,
     },
   },

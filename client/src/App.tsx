@@ -10,6 +10,7 @@ import Cart from "./pages/CartPage/Cart";
 import Checkout from "./pages/CheckoutPage/Checkout";
 import Login from "./pages/LoginPage/Login";
 import Register from "./pages/RegisterPage/Register";
+import Payment from "./pages/PaymentPage/Payment";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/checkout" exact component={Checkout} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
+        <Route path="/payment" exact component={Payment} />
         <Route path="/product/:id" exact component={Product} />
         <Route path="/browse/:mainCategory" exact component={Browse} />
       </Switch>

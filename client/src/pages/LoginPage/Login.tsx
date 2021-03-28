@@ -1,48 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import PageMap from "../../components/pageMap/PageMap";
 import { Button } from "../../styles/globalStyles";
+import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 
 import { LoginContainer, LoginMain, TitleRow, MainForm } from "./Login.styles";
 
-interface Props {}
+const initialState = {
+  email: "",
+  password: "",
+};
 
-const Login = (props: Props) => {
+const Login = () => {
+  const [form, setForm] = useState(initialState);
+  const history = useHistory();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    await createAPIEndpoint(ENDPOINTS.USERS)
+      .userSignIn(form)
+      .then(({ data }: any) => {
+        localStorage.setItem("profile", JSON.stringify(data));
+        history.push("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleChange = (e: any) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <PageMap pageName="Login" />
       <LoginContainer>
         <LoginMain>
           <TitleRow>
-            <h1>Sign In</h1>
+            <h1>Sign In for online shopping</h1>
           </TitleRow>
-          <MainForm>
+          <MainForm onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email">Email</label>
               <input
                 type="email"
-                id="email"
-                placeholder="Enter email"
+                name="email"
                 required
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
-                id="password"
-                placeholder="Enter password"
+                name="password"
                 required
+                onChange={handleChange}
               />
             </div>
             <Button
               propPadding="8px 12px"
               propWidth="100%"
               extraMargin="10px 0"
+              type="submit"
             >
               Sign In
             </Button>
             <p>
-              Don't have an account? <span>Register Now</span>
+              Don't have an account?{" "}
+              <span>
+                <Link
+                  to="/register"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Register Now
+                </Link>
+              </span>
             </p>
           </MainForm>
         </LoginMain>

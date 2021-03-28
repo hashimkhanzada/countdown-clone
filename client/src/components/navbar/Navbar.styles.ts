@@ -56,6 +56,7 @@ export const NavToolBar = styled.ul<{ click: Boolean }>`
     opacity: ${({ click }) => (click ? 1 : 0)};
     transition: all 0.5s ease;
     background: #39464e;
+    z-index: 999;
   }
 `;
 
