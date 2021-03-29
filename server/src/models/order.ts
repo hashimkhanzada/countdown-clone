@@ -6,12 +6,14 @@ interface IOrder extends Document {
       quantity: number;
       productSubTotal: number;
       productImage: string;
-      product: string;
+      productName: string;
+      productId: string;
     }
   ];
   user: string;
   totalPrice: number;
   address: string;
+  deliveryDate: string;
 }
 
 const orderSchema = new mongoose.Schema(
@@ -21,7 +23,8 @@ const orderSchema = new mongoose.Schema(
         quantity: { type: Number, required: true },
         productSubTotal: { type: Number, required: true },
         productImage: { type: String },
-        product: {
+        productName: { type: String },
+        productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
           required: true,
@@ -41,6 +44,7 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    deliveryDate: { type: String },
   },
   {
     timestamps: true,

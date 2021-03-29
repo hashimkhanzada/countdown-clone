@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import { Button } from "../../styles/globalStyles";
 
-import { Link } from "react-router-dom";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +9,6 @@ import {
   incrementCart,
   decrementCart,
   selectCart,
-  removeFromCart,
 } from "../../features/cart/cartSlice";
 
 import {
@@ -95,7 +93,7 @@ const Product = ({ match }: any) => {
         setNumberSelected(cartItem.quantity);
       }
     });
-  }, [cart]);
+  }, [cart, match.params.id]);
 
   return (
     <ProductContainer>

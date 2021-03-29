@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CartCard from "../../components/cartCard/CartCard";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -45,7 +45,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const subTotal = useSelector(selectSubTotal);
-  const [deliveryFee, setDeliveryFee] = useState(14);
+  const [deliveryFee] = useState(14);
 
   const clearTrolley = () => {
     dispatch(clearCart());

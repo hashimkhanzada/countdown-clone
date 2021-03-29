@@ -29,6 +29,10 @@ export const MainContainer = styled.div`
     display: flex;
     margin: 20px 0;
 
+    button {
+      font-weight: bolder;
+      font-size: 20px;
+    }
     @media screen and (max-width: 1030px) {
       align-items: center;
       flex-direction: column;

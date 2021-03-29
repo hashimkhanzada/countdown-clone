@@ -11,6 +11,7 @@ export const newOrder = async (req: Request, res: Response) => {
       user: req.body.user._id,
       totalPrice: req.body.totalPrice,
       address: req.body.address,
+      deliveryDate: req.body.deliveryDate,
     });
 
     const createdOrder = await order.save();

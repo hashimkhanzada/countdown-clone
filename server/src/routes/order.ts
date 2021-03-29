@@ -6,7 +6,7 @@ import auth from "../middleware/auth";
 
 const router = express.Router();
 
-router.post("/", expressAsyncHandler(newOrder));
-router.get("/", expressAsyncHandler(getOrders));
+router.post("/", auth, expressAsyncHandler(newOrder));
+router.get("/", auth, expressAsyncHandler(getOrders));
 
 export default router;

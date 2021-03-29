@@ -38,7 +38,7 @@ const PaginationBar = ({
       )}
 
       {pageNumbers.map((number) => {
-        return number == selectedPage ? (
+        return number === selectedPage ? (
           <a id={number.toString()} className="active" key={number} href="#">
             {number}
           </a>

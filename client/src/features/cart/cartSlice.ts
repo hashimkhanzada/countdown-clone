@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NumberLiteralType } from "typescript";
-import { AppThunk, RootState } from "../../app/store";
+import { RootState } from "../../app/store";
 
 interface CartState {
   cartItems: any;

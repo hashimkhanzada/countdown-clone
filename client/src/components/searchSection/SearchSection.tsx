@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../../controls/searchBar/SearchBar";
 import { Button } from "../../styles/globalStyles";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 
 import {
   SearchSectionContainer,

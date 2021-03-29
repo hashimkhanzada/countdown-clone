@@ -2,10 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../../styles/globalStyles";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PageMap from "../../components/pageMap/PageMap";
+import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectCart, selectSubTotal } from "../../features/cart/cartSlice";
-import { selectDelivery } from "../../features/delivery/deliverySlice";
+import {
+  selectCart,
+  selectSubTotal,
+  clearCart,
+} from "../../features/cart/cartSlice";
+import {
+  selectDelivery,
+  selectDeliveryDate,
+  setDeliveryReceipt,
+} from "../../features/delivery/deliverySlice";
 
 import {
   PaymentContainer,
@@ -18,20 +27,22 @@ import {
 interface IOrder {
   quantity: Number;
   productSubTotal: Number;
-  product: string;
+  productId: string;
   productImage: string;
+  productName: string;
 }
 
 const Payment = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const deliveryAddress = useSelector(selectDelivery);
+  const deliveryDate = useSelector(selectDeliveryDate);
   const subTotal = useSelector(selectSubTotal);
 
+  const history = useHistory();
+
   const [orderItems, setOrderItems] = useState<IOrder[]>();
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile") || "{}")
-  );
+  const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
 
   useEffect(() => {
     const newOrder: IOrder[] = [];
@@ -40,8 +51,9 @@ const Payment = () => {
       const orderItem: IOrder = {
         quantity: el.quantity,
         productSubTotal: el.calculatedPrice,
-        product: el._id,
+        productId: el._id,
         productImage: el.image,
+        productName: el.name,
       };
 
       newOrder.push(orderItem);
@@ -57,9 +69,12 @@ const Payment = () => {
         user: JSON.parse(localStorage.getItem("profile") || "{}").result,
         totalPrice: subTotal,
         address: deliveryAddress,
+        deliveryDate: deliveryDate,
       })
       .then((response: any) => {
-        console.log(response.data);
+        dispatch(setDeliveryReceipt(response.data.order));
+        dispatch(clearCart());
+        history.push("/receipt");
       })
       .catch((err) => console.log(err));
   };

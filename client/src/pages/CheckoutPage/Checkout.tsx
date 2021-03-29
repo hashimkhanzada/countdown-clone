@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FiTruck } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../styles/globalStyles";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   CheckoutContainer,
@@ -13,21 +13,25 @@ import {
   TimeslotRow,
 } from "./Checkout.styles";
 
-import { selectDelivery } from "../../features/delivery/deliverySlice";
+import {
+  selectDelivery,
+  changeDeliveryDate,
+  selectDeliveryDate,
+} from "../../features/delivery/deliverySlice";
 import PageMap from "../../components/pageMap/PageMap";
 
 const Checkout = () => {
   const deliveryAddress = useSelector(selectDelivery);
+  const deliveryDate = useSelector(selectDeliveryDate);
+  const dispatch = useDispatch();
 
   const [deliveryType, setDeliveryType] = useState("Delivery");
-  const [dayId, setDayId] = useState("Monday");
 
-  const location = useLocation();
-  const history = useHistory();
+  const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile") || "{}")
-  );
+  const setDeliveryDate = (e: any) => {
+    dispatch(changeDeliveryDate(e.target.name));
+  };
 
   return (
     <>
@@ -79,39 +83,39 @@ const Checkout = () => {
               <p style={{ marginLeft: "10px" }}>Next available slot:</p>
               <div className="deliveryButtons">
                 <button
-                  onClick={() => setDayId("Monday")}
+                  onClick={setDeliveryDate}
                   name="Monday"
-                  className={dayId === "Monday" ? "selected" : ""}
+                  className={deliveryDate === "Monday" ? "selected" : ""}
                 >
-                  <p>Monday</p>
+                  Monday
                 </button>
                 <button
-                  onClick={() => setDayId("Tuesday")}
+                  onClick={setDeliveryDate}
                   name="Tuesday"
-                  className={dayId === "Tuesday" ? "selected" : ""}
+                  className={deliveryDate === "Tuesday" ? "selected" : ""}
                 >
-                  <p>Tuesday</p>
+                  Tuesday
                 </button>
                 <button
-                  onClick={() => setDayId("Wednesday")}
+                  onClick={setDeliveryDate}
                   name="Wednesday"
-                  className={dayId === "Wednesday" ? "selected" : ""}
+                  className={deliveryDate === "Wednesday" ? "selected" : ""}
                 >
-                  <p>Wednesday</p>
+                  Wednesday
                 </button>
                 <button
-                  onClick={() => setDayId("Thursday")}
+                  onClick={setDeliveryDate}
                   name="Thursday"
-                  className={dayId === "Thursday" ? "selected" : ""}
+                  className={deliveryDate === "Thursday" ? "selected" : ""}
                 >
-                  <p>Thursday</p>
+                  Thursday
                 </button>
                 <button
-                  onClick={() => setDayId("Friday")}
+                  onClick={setDeliveryDate}
                   name="Friday"
-                  className={dayId === "Friday" ? "selected" : ""}
+                  className={deliveryDate === "Friday" ? "selected" : ""}
                 >
-                  <p>Friday</p>
+                  Friday
                 </button>
               </div>
             </TimeslotRow>
@@ -134,8 +138,8 @@ const Checkout = () => {
                     <h3>Returning Customer</h3>
 
                     <p>
-                      Please use your countdown account to sign in and access
-                      your saved information
+                      Sign In to continue checkout, if you have an existing
+                      countdown account
                     </p>
                     <Link
                       to="/login"
