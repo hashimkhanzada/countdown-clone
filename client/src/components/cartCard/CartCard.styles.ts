@@ -26,6 +26,10 @@ export const Col2 = styled.div`
   align-items: center;
   justify-content: center;
 
+  @media screen and (max-width: 1030px) {
+    flex-direction: column;
+  }
+
   > * {
     padding: 12px 16px;
   }
@@ -88,6 +92,7 @@ export const InfoCol = styled.div`
 
 export const QuantityCol = styled.div`
   display: flex;
+
   input {
     border: 1px solid #b4b9bc;
     border-bottom-left-radius: 5px;

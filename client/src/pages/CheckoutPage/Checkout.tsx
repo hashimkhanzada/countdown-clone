@@ -40,7 +40,7 @@ const Checkout = () => {
                 <h3 className="num">1</h3>
                 <h3>Delivery or Pick up?</h3>
               </div>
-              <div style={{ display: "flex", margin: "20px 0" }}>
+              <div className="deliveryButtons">
                 <button
                   onClick={() => setDeliveryType("Delivery")}
                   name="Delivery"
@@ -77,7 +77,7 @@ const Checkout = () => {
                 <h3>Choose a day</h3>
               </div>
               <p style={{ marginLeft: "10px" }}>Next available slot:</p>
-              <div style={{ display: "flex", margin: "5px 0" }}>
+              <div className="deliveryButtons">
                 <button
                   onClick={() => setDayId("Monday")}
                   name="Monday"

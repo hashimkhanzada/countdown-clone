@@ -21,6 +21,24 @@ export const MainContainer = styled.div`
   background-color: white;
   padding: 48px 180px;
 
+  @media screen and (max-width: 1030px) {
+    padding: 48px 10px;
+  }
+
+  .deliveryButtons {
+    display: flex;
+    margin: 20px 0;
+
+    @media screen and (max-width: 1030px) {
+      align-items: center;
+      flex-direction: column;
+
+      button {
+        margin: 5px 0;
+      }
+    }
+  }
+
   .checkoutOptions {
     margin: 20px 0;
     display: flex;

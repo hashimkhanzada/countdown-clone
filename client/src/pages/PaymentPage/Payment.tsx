@@ -108,7 +108,7 @@ const Payment = () => {
                       alt="card types"
                     />
                   </div>
-                  <div style={{ width: "40%", marginTop: "30px" }}>
+                  <div className="cardContainer">
                     <input
                       placeholder="Card number"
                       style={{

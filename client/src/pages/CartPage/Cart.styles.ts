@@ -41,6 +41,11 @@ export const TotalCostRow = styled.div`
   padding: 25px 50px;
   width: 50%;
 
+  @media screen and (max-width: 1030px) {
+    width: 100%;
+    padding: 25px;
+  }
+
   > * {
     margin: 2px 0;
   }
@@ -57,6 +62,10 @@ export const Total = styled.div`
 
   h1 {
     font-size: 26px;
+
+    @media screen and (max-width: 1030px) {
+      font-size: 20px;
+    }
   }
 `;
 

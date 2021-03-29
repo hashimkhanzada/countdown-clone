@@ -21,6 +21,10 @@ export const MainContainer = styled.div`
   background-color: white;
   padding: 48px 180px;
 
+  @media screen and (max-width: 1030px) {
+    padding: 48px 10px;
+  }
+
   .checkoutOptions {
     margin: 20px 0;
     display: flex;
@@ -59,4 +63,18 @@ export const PaymentInfoRow = styled.div`
 export const CreditCardRow = styled.div`
   display: flex;
   flex-direction: column;
+
+  .cardContainer {
+    width: 40%;
+    margin-top: 30px;
+
+    @media screen and (max-width: 1030px) {
+      width: 100%;
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+  }
 `;
