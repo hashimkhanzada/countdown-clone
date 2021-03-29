@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -17,6 +17,10 @@ app.use(cors());
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Countdown clone server");
+});
 
 const PORT = process.env.PORT || 5002;
 
