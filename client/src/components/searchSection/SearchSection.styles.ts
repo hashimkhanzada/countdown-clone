@@ -42,6 +42,10 @@ export const DeliveryRow = styled.div`
     left: 10px;
     width: 30%;
 
+    @media screen and (max-width: 1030px) {
+      width: 90%;
+    }
+
     > * {
       margin: 5px 0;
     }

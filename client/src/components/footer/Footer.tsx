@@ -8,11 +8,13 @@ const Footer = () => {
       <FooterContainer>
         <div className="col">
           <h3>Browse</h3>
-          <FooterLink to="/">Departments</FooterLink>
-          <FooterLink to="/">Specials</FooterLink>
-          <FooterLink to="/">Recipes</FooterLink>
-          <FooterLink to="/">Shopping List</FooterLink>
-          <FooterLink to="/">myCountdown App</FooterLink>
+          <FooterLink to="/browse/fruit-veg">Fruit & Veg</FooterLink>
+          <FooterLink to="/browse/meat-seafood">Meat & Seafood</FooterLink>
+          <FooterLink to="/browse/fridge">Fridge & Deli</FooterLink>
+          <FooterLink to="/browse/frozen">Frozen</FooterLink>
+          <FooterLink to="/browse/pantry">Pantry</FooterLink>
+          <FooterLink to="/browse/beer-wine">Beer & Wine</FooterLink>
+          <FooterLink to="/browse/drinks">Drinks</FooterLink>
         </div>
         <div className="col">
           {" "}
