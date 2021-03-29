@@ -71,6 +71,7 @@ const ProductCard = (props: Props) => {
   useEffect(() => {
     cart.forEach((cartItem: any) => {
       if (cartItem._id === props._id) {
+        setIsInCart(true);
         setNumberSelected(cartItem.quantity);
       }
     });

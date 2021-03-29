@@ -20,6 +20,29 @@ export const MainContainer = styled.div`
   flex-direction: column;
   background-color: white;
   padding: 48px 180px;
+
+  .checkoutOptions {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    .checkoutMethod {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: solid 1px #889ca8;
+      border-radius: 5px;
+      padding: 20px;
+      width: 100%;
+      margin: 0 10px;
+
+      p {
+        margin: 10px 0;
+        font-size: 14px;
+      }
+    }
+  }
 `;
 
 export const DeliveryRow = styled.div`

@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "../../styles/globalStyles";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
+import PageMap from "../../components/pageMap/PageMap";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, selectSubTotal } from "../../features/cart/cartSlice";
 import { selectDelivery } from "../../features/delivery/deliverySlice";
+
+import {
+  PaymentContainer,
+  PaymentMain,
+  MainContainer,
+  PaymentInfoRow,
+  CreditCardRow,
+} from "./Payment.styles";
 
 interface IOrder {
   quantity: Number;
@@ -20,6 +29,9 @@ const Payment = () => {
   const subTotal = useSelector(selectSubTotal);
 
   const [orderItems, setOrderItems] = useState<IOrder[]>();
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("profile") || "{}")
+  );
 
   useEffect(() => {
     const newOrder: IOrder[] = [];
@@ -53,11 +65,111 @@ const Payment = () => {
   };
 
   return (
-    <div>
-      <Button extraMargin="50px" onClick={createOrder}>
-        Finish
-      </Button>
-    </div>
+    <>
+      <PageMap pageName="Payment" />
+      <PaymentContainer>
+        <PaymentMain>
+          <MainContainer>
+            {user?.result ? (
+              <>
+                <PaymentInfoRow>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <h2>Checkout - Payment</h2>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "25px",
+                      border: "solid 1px #889ca8",
+                      borderRadius: "5px",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <h3>
+                      Amount left to pay <span>${subTotal}</span>
+                    </h3>
+                  </div>
+                </PaymentInfoRow>
+                <CreditCardRow>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "solid 1px #889ca8",
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <h4 style={{ marginRight: "15px" }}>
+                      Pay with Credit or Debit Card
+                    </h4>
+                    <img
+                      src="https://static.countdown.co.nz/assets/images/Checkout/Payment/icon-cards.png"
+                      alt="card types"
+                    />
+                  </div>
+                  <div style={{ width: "40%", marginTop: "30px" }}>
+                    <input
+                      placeholder="Card number"
+                      style={{
+                        width: "100%",
+                        padding: "8px 12px",
+                        borderRadius: "2px",
+                        border: "solid 1px #889ca8",
+                      }}
+                    />
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        padding: "5px 0",
+                      }}
+                    >
+                      <input
+                        placeholder="Exp MM"
+                        style={{
+                          width: "32%",
+                          padding: "8px 12px",
+                          borderRadius: "2px",
+                          border: "solid 1px #889ca8",
+                        }}
+                      />
+                      <input
+                        placeholder="Exp YY"
+                        style={{
+                          width: "32%",
+                          padding: "8px 12px",
+                          borderRadius: "2px",
+                          border: "solid 1px #889ca8",
+                        }}
+                      />
+                      <input
+                        placeholder="CVV"
+                        style={{
+                          width: "32%",
+                          padding: "8px 12px",
+                          borderRadius: "2px",
+                          border: "solid 1px #889ca8",
+                        }}
+                      />
+                    </div>
+                    <Button
+                      propPadding="8px 12px"
+                      extraMargin="5px 0"
+                      onClick={createOrder}
+                    >
+                      Submit and Confirm Order
+                    </Button>
+                  </div>
+                </CreditCardRow>
+              </>
+            ) : (
+              <h2>Please Log In to complete checkout</h2>
+            )}
+          </MainContainer>
+        </PaymentMain>
+      </PaymentContainer>
+    </>
   );
 };
 
