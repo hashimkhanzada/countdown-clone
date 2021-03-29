@@ -90,6 +90,14 @@ export const OrderItemsRow = styled.div`
     background-color: #dddddd;
   }
 
+  tr:last-child {
+    border-top: solid 1px #dddddd;
+    background-color: white;
+    th {
+      border-bottom: none;
+    }
+  }
+
   th,
   td {
     padding: 10px;

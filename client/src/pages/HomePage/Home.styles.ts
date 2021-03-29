@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -84,4 +85,9 @@ export const SpecialsRow = styled.div`
       margin: 10px 0;
     }
   }
+`;
+
+export const CardLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;

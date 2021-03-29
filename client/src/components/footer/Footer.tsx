@@ -111,15 +111,17 @@ export const CopyrightContainer = styled.div`
   padding: 22px;
 
   span {
-    padding: 0 5px;
-    cursor: pointer;
-
     @media screen and (max-width: 1030px) {
       display: none;
     }
 
-    &:hover {
-      text-decoration: underline;
+    > span {
+      padding: 0 5px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;

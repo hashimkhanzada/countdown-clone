@@ -3,7 +3,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import HomeCard from "./HomeCard";
 
-import { HomeContainer, HomeMain, IconRow, SpecialsRow } from "./Home.styles";
+import {
+  HomeContainer,
+  HomeMain,
+  IconRow,
+  SpecialsRow,
+  CardLink,
+} from "./Home.styles";
 
 const Home = () => {
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
@@ -196,26 +202,37 @@ const Home = () => {
           </div>
         </IconRow>
         <SpecialsRow>
-          <HomeCard
-            title="SHOP"
-            description="Check out these Hot Hot Specials"
-            imageUrl="https://shop.countdown.co.nz/content/F2140-HT-Hot-hot-v2.jpg"
-          />
-          <HomeCard
-            title="SHOP"
-            description="Check out these Beer & Wine Specials"
-            imageUrl="https://shop.countdown.co.nz/content/F2140-HT-Liquor-Specials-v2.jpg"
-          />
-          <HomeCard
-            title="SHOP"
-            description="Pick Any 3 for $20 Meat & Seafood"
-            imageUrl="https://shop.countdown.co.nz/content/F2138-HT-3for20-NI.jpg"
-          />
-          <HomeCard
-            title="SHOP"
-            description="Check out these Easter Specials"
-            imageUrl="https://shop.countdown.co.nz/content/F2140-HT-Easter-specials.jpg"
-          />
+          <CardLink to="/browse/pantry">
+            <HomeCard
+              title="SHOP"
+              description="Check out these Hot Hot Specials"
+              imageUrl="https://shop.countdown.co.nz/content/F2140-HT-Hot-hot-v2.jpg"
+            />
+          </CardLink>
+
+          <CardLink to="/browse/beer-wine">
+            <HomeCard
+              title="SHOP"
+              description="Check out these Beer & Wine Specials"
+              imageUrl="https://shop.countdown.co.nz/content/F2140-HT-Liquor-Specials-v2.jpg"
+            />
+          </CardLink>
+
+          <CardLink to="/browse/meat-seafood">
+            <HomeCard
+              title="SHOP"
+              description="Pick Any 3 for $20 Meat & Seafood"
+              imageUrl="https://shop.countdown.co.nz/content/F2138-HT-3for20-NI.jpg"
+            />
+          </CardLink>
+
+          <CardLink to="/browse/drinks">
+            <HomeCard
+              title="SHOP"
+              description="Check out these Easter Specials"
+              imageUrl="https://shop.countdown.co.nz/content/F2140-HT-Easter-specials.jpg"
+            />
+          </CardLink>
         </SpecialsRow>
       </HomeMain>
     </HomeContainer>

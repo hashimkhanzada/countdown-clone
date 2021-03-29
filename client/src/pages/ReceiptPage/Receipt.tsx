@@ -25,6 +25,19 @@ th {
   border-bottom: 1px solid #dddddd;
 } 
 
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr:last-child {
+  border-top: solid 1px #dddddd;
+  background-color: white; 
+}
+
+tr:last-child th{
+  border-bottom: none;
+}
+
 th,
 td {
   padding: 10px;
@@ -138,6 +151,7 @@ const Receipt = () => {
                     <tr>
                       <th>Total</th>
                       <td>${receipt?.totalPrice}</td>
+                      <td></td>
                     </tr>
                   </table>
                 </OrderItemsRow>
