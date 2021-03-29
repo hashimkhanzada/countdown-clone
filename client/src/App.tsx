@@ -12,6 +12,7 @@ import Login from "./pages/LoginPage/Login";
 import Register from "./pages/RegisterPage/Register";
 import Payment from "./pages/PaymentPage/Payment";
 import Receipt from "./pages/ReceiptPage/Receipt";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/product/:id" exact component={Product} />
         <Route path="/browse/:mainCategory" exact component={Browse} />
       </Switch>
+
+      <Footer />
     </Router>
   );
 }
