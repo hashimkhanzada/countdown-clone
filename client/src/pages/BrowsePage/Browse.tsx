@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PaginationBar from "../../components/paginationBar/PaginationBar";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -41,7 +42,7 @@ interface ProductInfo {
   weightUnit?: string;
 }
 
-const Browse = ({ match }: any) => {
+const Browse = ({ setLoading, match }: any) => {
   const [productData, setProductData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -59,6 +60,7 @@ const Browse = ({ match }: any) => {
   }, [match]);
 
   useEffect(() => {
+    setLoading(true);
     const GetData = async () => {
       await createAPIEndpoint(ENDPOINTS.BROWSE)
         .fetchProductsByMainCategory(
@@ -69,6 +71,7 @@ const Browse = ({ match }: any) => {
         .then((response: any) => {
           setProductData(response.data.results.paginatedProducts);
           setTotalItems(response.data.totalProducts);
+          setLoading(false);
 
           response.data.results.next.page
             ? setIsLastPage(false)
@@ -87,7 +90,7 @@ const Browse = ({ match }: any) => {
         .then((response: any) => {
           setProductData(response.data.results.paginatedProducts);
           setTotalItems(response.data.totalProducts);
-
+          setLoading(false);
           response.data.results.next.page
             ? setIsLastPage(false)
             : setIsLastPage(true);
@@ -219,4 +222,4 @@ const Browse = ({ match }: any) => {
   );
 };
 
-export default Browse;
+export default IsLoadingHOC(Browse);

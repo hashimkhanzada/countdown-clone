@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PageMap from "../../components/pageMap/PageMap";
 import { format } from "date-fns";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
-const OrderDetails = ({ match }: any) => {
+const OrderDetails = ({ match, setLoading }: any) => {
   const [orderDetails, setOrderDetails] = useState<any>();
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
   const [orderPlaced, setOrderPlaced] = useState<any>();
 
   useEffect(() => {
+    setLoading(true);
     const getOrderHistory = async () => {
       await createAPIEndpoint(ENDPOINTS.ORDERS)
         .fetchOrderById(match.params.orderId)
@@ -21,6 +23,7 @@ const OrderDetails = ({ match }: any) => {
               " dd-MMM-yyyy"
             )
           );
+          setLoading(false);
         })
         .catch((err: any) => console.log(err));
     };
@@ -84,7 +87,7 @@ const OrderDetails = ({ match }: any) => {
   );
 };
 
-export default OrderDetails;
+export default IsLoadingHOC(OrderDetails);
 
 export const OrderDetailsContainer = styled.div`
   display: flex;

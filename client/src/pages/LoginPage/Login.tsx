@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import PageMap from "../../components/pageMap/PageMap";
 import { Button } from "../../styles/globalStyles";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
 import { useDispatch } from "react-redux";
 import { changeDeliveryAddress } from "../../features/delivery/deliverySlice";
@@ -14,17 +15,23 @@ const initialState = {
   password: "",
 };
 
-const Login = () => {
+const Login = ({ setLoading }: any) => {
   const [form, setForm] = useState(initialState);
   const history = useHistory();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
 
     await createAPIEndpoint(ENDPOINTS.USERS)
       .userSignIn(form)
       .then(({ data }: any) => {
+        setLoading(false);
         localStorage.setItem("profile", JSON.stringify(data));
         dispatch(changeDeliveryAddress(data.result.address));
         history.push("/");
@@ -89,4 +96,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default IsLoadingHOC(Login);

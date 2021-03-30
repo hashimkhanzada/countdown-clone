@@ -67,6 +67,13 @@ const Receipt = () => {
     setUser(null);
   };
 
+  if (!receipt.createdAt)
+    return (
+      <h2 style={{ textAlign: "center", paddingTop: "20px" }}>
+        Sorry, this page is not available. Go to 'My Orders' to view order
+        details
+      </h2>
+    );
   return (
     <>
       <PageMap pageName="Receipt" />

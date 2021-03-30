@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import { Button } from "../../styles/globalStyles";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
@@ -42,7 +43,7 @@ interface ProductInfo {
   description?: string;
 }
 
-const Product = ({ match }: any) => {
+const Product = ({ match, setLoading }: any) => {
   const [productData, setProductData] = useState<ProductInfo>();
 
   const dispatch = useDispatch();
@@ -51,13 +52,13 @@ const Product = ({ match }: any) => {
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const GetData = async () => {
       await createAPIEndpoint(ENDPOINTS.BROWSE)
         .fetchById(match.params.id)
         .then((response: any) => {
           setProductData(response.data);
-
-          console.log(response.data);
+          setLoading(false);
         })
         .catch((err) => console.log(err));
     };
@@ -144,4 +145,4 @@ const Product = ({ match }: any) => {
   );
 };
 
-export default Product;
+export default IsLoadingHOC(Product);

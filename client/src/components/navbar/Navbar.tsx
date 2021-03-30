@@ -4,6 +4,9 @@ import DropDown from "./DropDown";
 import { FaBars, FaTimes } from "react-icons/fa";
 import decode from "jwt-decode";
 
+import { useDispatch } from "react-redux";
+import { changeDeliveryAddress } from "../../features/delivery/deliverySlice";
+
 import {
   Nav,
   NavLogo,
@@ -23,6 +26,8 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
   const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile") || "{}")
@@ -45,6 +50,11 @@ const Navbar = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem("profile") || "{}"));
+    dispatch(
+      changeDeliveryAddress(
+        JSON.parse(localStorage.getItem("profile") || "{}").result?.address
+      )
+    );
   }, [location]);
 
   const [imgUrl, setImgUrl] = useState(

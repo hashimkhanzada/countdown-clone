@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import PageMap from "../../components/pageMap/PageMap";
 import { Button } from "../../styles/globalStyles";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
 import {
   RegisterContainer,
@@ -19,17 +20,21 @@ const initialState = {
   address: "",
 };
 
-const Register = () => {
+const Register = ({ setLoading }: any) => {
   const [form, setForm] = useState(initialState);
   const history = useHistory();
 
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    setLoading(true);
     await createAPIEndpoint(ENDPOINTS.USERS)
       .userRegister(form)
       .then(({ data }: any) => {
-        console.log(data);
+        setLoading(false);
         history.push("/login");
       })
       .catch((err) => console.log(err));
@@ -128,4 +133,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default IsLoadingHOC(Register);

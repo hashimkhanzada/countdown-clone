@@ -3,6 +3,7 @@ import { Button } from "../../styles/globalStyles";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PageMap from "../../components/pageMap/PageMap";
 import { useHistory } from "react-router-dom";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -32,7 +33,7 @@ interface IOrder {
   productName: string;
 }
 
-const Payment = () => {
+const Payment = ({ setLoading }: any) => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const deliveryAddress = useSelector(selectDelivery);
@@ -45,6 +46,7 @@ const Payment = () => {
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
 
   useEffect(() => {
+    setLoading(false);
     const newOrder: IOrder[] = [];
 
     cart.forEach((el: any) => {
@@ -63,17 +65,19 @@ const Payment = () => {
   }, [cart]);
 
   const createOrder = async () => {
+    setLoading(true);
     await createAPIEndpoint(ENDPOINTS.ORDERS)
       .createNewOrder({
         orderItems: orderItems,
         user: JSON.parse(localStorage.getItem("profile") || "{}").result,
-        totalPrice: subTotal + 14,
+        totalPrice: Math.round((+subTotal + 14) * 100) / 100,
         address: deliveryAddress,
         deliveryDate: deliveryDate,
       })
       .then((response: any) => {
         dispatch(setDeliveryReceipt(response.data.order));
         dispatch(clearCart());
+        setLoading(false);
         history.push("/receipt");
       })
       .catch((err) => console.log(err));
@@ -188,4 +192,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default IsLoadingHOC(Payment);

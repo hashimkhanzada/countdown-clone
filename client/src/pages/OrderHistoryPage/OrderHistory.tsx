@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageMap from "../../components/pageMap/PageMap";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import { format } from "date-fns";
+import IsLoadingHOC from "../../IsLoadingHOC";
 
 import {
   OrderHistoryContainer,
@@ -10,17 +11,19 @@ import {
   OrderLink,
 } from "./OrderHistory.styles";
 
-const OrderHistory = () => {
+const OrderHistory = ({ setLoading }: any) => {
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
 
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     const getOrderHistory = async () => {
       await createAPIEndpoint(ENDPOINTS.ORDERS)
         .fetchOrderHistory(user.result._id)
         .then((response: any) => {
           setOrders(response.data);
+          setLoading(false);
         })
         .catch((err: any) => console.log(err));
     };
@@ -83,4 +86,4 @@ const OrderHistory = () => {
   );
 };
 
-export default OrderHistory;
+export default IsLoadingHOC(OrderHistory);
