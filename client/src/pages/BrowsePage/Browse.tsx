@@ -80,6 +80,10 @@ const Browse = ({ setLoading, match }: any) => {
           response.data.results.previous.page
             ? setIsFirstPage(false)
             : setIsFirstPage(true);
+
+          if (!response.data.results.paginatedProducts.length) {
+            setCurrentPage(1);
+          }
         })
         .catch((err) => console.log(err));
     };

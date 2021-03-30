@@ -127,22 +127,36 @@ export const MainContainer = styled.div`
 
   table {
     width: 100%;
-    margin-top: 20px;
+    margin: 40px 0;
     border-collapse: collapse;
     font-size: 14px;
+    border: 1px solid #dddddd;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
 
   th {
-    border-bottom: 1px solid #dddddd;
+    background-color: #007837;
+    color: #ffffff;
   }
 
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #f3f3f3;
+  }
+
+  tr {
+    border-bottom: 1px solid #dddddd;
+    &:hover {
+      background-color: #dddddd;
+    }
+  }
+
+  tr:last-child {
+    border-bottom: 2px solid #009879;
   }
 
   th,
   td {
-    padding: 10px;
+    padding: 12px 15px;
     text-align: left;
   }
 `;

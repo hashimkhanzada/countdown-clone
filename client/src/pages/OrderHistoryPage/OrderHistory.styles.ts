@@ -31,33 +31,39 @@ export const MainContainer = styled.div`
     margin-top: 20px;
     border-collapse: collapse;
     font-size: 14px;
+    border: 1px solid #dddddd;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
 
   th {
-    border-bottom: 1px solid #dddddd;
+    background-color: #007837;
+    color: #ffffff;
   }
 
   tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
-  tr:last-child {
-    border-top: solid 1px #dddddd;
-    background-color: white;
-    th {
-      border-bottom: none;
-    }
+    background-color: #f3f3f3;
   }
 
   tr {
+    border-bottom: 1px solid #dddddd;
     td:last-child {
+      font-weight: bolder;
+
       text-align: center;
     }
+
+    &:hover {
+      background-color: #dddddd;
+    }
+  }
+
+  tr:last-child {
+    border-bottom: 2px solid #009879;
   }
 
   th,
   td {
-    padding: 10px;
+    padding: 12px 15px;
     text-align: left;
   }
 `;

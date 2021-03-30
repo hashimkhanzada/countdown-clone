@@ -166,7 +166,6 @@ const Receipt = () => {
                       <tr>
                         <th>Total</th>
                         <td>${receipt?.totalPrice}</td>
-                        <td></td>
                       </tr>
                     </tbody>
                   </table>

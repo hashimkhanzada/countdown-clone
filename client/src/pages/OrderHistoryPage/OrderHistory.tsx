@@ -47,7 +47,7 @@ const OrderHistory = ({ setLoading }: any) => {
                       <th>Order #</th>
                       <th>Item Count</th>
                       <th>Total</th>
-                      <th> </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>

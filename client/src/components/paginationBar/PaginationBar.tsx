@@ -32,23 +32,16 @@ const PaginationBar = ({
       {isFirstPage ? (
         <a className="disabled">&laquo;</a>
       ) : (
-        <a onClick={prevPage} href="#">
-          &laquo;
-        </a>
+        <a onClick={prevPage}>&laquo;</a>
       )}
 
       {pageNumbers.map((number) => {
-        return number === selectedPage ? (
-          <a id={number.toString()} className="active" key={number} href="#">
+        return number == selectedPage ? (
+          <a id={number.toString()} className="active" key={number}>
             {number}
           </a>
         ) : (
-          <a
-            id={number.toString()}
-            onClick={onPageChange}
-            key={number}
-            href="#"
-          >
+          <a id={number.toString()} onClick={onPageChange} key={number}>
             {number}
           </a>
         );
@@ -57,9 +50,7 @@ const PaginationBar = ({
       {isLastPage ? (
         <a className="disabled">&raquo;</a>
       ) : (
-        <a onClick={nextPage} href="#">
-          &raquo;
-        </a>
+        <a onClick={nextPage}>&raquo;</a>
       )}
     </Container>
   );
@@ -69,6 +60,10 @@ export default PaginationBar;
 
 const Container = styled.div`
   display: inline-block;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   a {
     color: black;
