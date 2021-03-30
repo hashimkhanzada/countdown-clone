@@ -138,7 +138,7 @@ const Navbar = () => {
             </NavToolBarItem>
           </NavToolBar>
           <QuickNav>
-            <QuickNavItem to="/">My Account</QuickNavItem>
+            <QuickNavItem to="/orderhistory">My Orders</QuickNavItem>
             <QuickNavItem to="/">Help</QuickNavItem>
             <QuickNavItem to="/">Contact</QuickNavItem>
             {user?.result ? (

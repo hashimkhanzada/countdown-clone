@@ -23,3 +23,21 @@ export const getOrders = async (req: Request, res: Response) => {
   const orders = await Order.find({});
   res.send(orders);
 };
+
+export const getOrderById = async (req: Request, res: Response) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    res.send(order);
+  } else {
+    res.status(404).send({ message: "Order not found" });
+  }
+};
+
+export const getOrderHistory = async (req: Request, res: Response) => {
+  const orders = await Order.find({ user: req.params.userId });
+  if (orders) {
+    res.send(orders);
+  } else {
+    res.status(404).send({ message: "Order history not found" });
+  }
+};

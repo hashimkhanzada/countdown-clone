@@ -67,7 +67,7 @@ const Payment = () => {
       .createNewOrder({
         orderItems: orderItems,
         user: JSON.parse(localStorage.getItem("profile") || "{}").result,
-        totalPrice: subTotal,
+        totalPrice: subTotal + 14,
         address: deliveryAddress,
         deliveryDate: deliveryDate,
       })

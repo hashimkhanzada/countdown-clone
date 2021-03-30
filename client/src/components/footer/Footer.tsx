@@ -30,7 +30,7 @@ const Footer = () => {
           <h3>My Account</h3>
           <FooterLink to="/">My Details</FooterLink>
           <FooterLink to="/">My Addresses</FooterLink>
-          <FooterLink to="/">My Orders</FooterLink>
+          <FooterLink to="/orderHistory">My Orders</FooterLink>
           <FooterLink to="/">My Onecards</FooterLink>
           <FooterLink to="/">My Delivery Savers</FooterLink>
           <FooterLink to="/">My Settings</FooterLink>

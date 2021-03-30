@@ -13,6 +13,8 @@ import Register from "./pages/RegisterPage/Register";
 import Payment from "./pages/PaymentPage/Payment";
 import Receipt from "./pages/ReceiptPage/Receipt";
 import Footer from "./components/footer/Footer";
+import OrderHistory from "./pages/OrderHistoryPage/OrderHistory";
+import OrderDetails from "./pages/OrderHistoryPage/OrderDetails";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/register" exact component={Register} />
         <Route path="/payment" exact component={Payment} />
         <Route path="/receipt" exact component={Receipt} />
+        <Route path="/orderhistory" exact component={OrderHistory} />
+        <Route path="/orderhistory/:orderId" exact component={OrderDetails} />
         <Route path="/product/:id" exact component={Product} />
         <Route path="/browse/:mainCategory" exact component={Browse} />
       </Switch>
