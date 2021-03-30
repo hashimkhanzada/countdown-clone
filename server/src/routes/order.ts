@@ -11,9 +11,9 @@ import auth from "../middleware/auth";
 
 const router = express.Router();
 
-router.post("/", expressAsyncHandler(newOrder));
-router.get("/", expressAsyncHandler(getOrders));
-router.get("/history/:userId", expressAsyncHandler(getOrderHistory));
-router.get("/:id", expressAsyncHandler(getOrderById));
+router.post("/", auth, expressAsyncHandler(newOrder));
+router.get("/", auth, expressAsyncHandler(getOrders));
+router.get("/:id", auth, expressAsyncHandler(getOrderById));
+router.get("/history/:userId", auth, expressAsyncHandler(getOrderHistory));
 
 export default router;

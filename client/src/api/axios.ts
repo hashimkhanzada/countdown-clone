@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5002/api/";
+const BASE_URL = "https://countdown-clone.herokuapp.com/api/";
 
 export const ENDPOINTS = {
   PRODUCTS: "products",
@@ -70,8 +70,21 @@ export const createAPIEndpoint = (endpoint: String) => {
     },
 
     fetchOrderHistory: (userId: string) =>
-      axios.get(`${url}/history/${userId}`),
+      axios.get(`${url}/history/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("profile") || "{}").token
+          }`,
+        },
+      }),
 
-    fetchOrderById: (orderId: string) => axios.get(`${url}/${orderId}`),
+    fetchOrderById: (orderId: string) =>
+      axios.get(`${url}/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("profile") || "{}").token
+          }`,
+        },
+      }),
   };
 };

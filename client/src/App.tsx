@@ -3,18 +3,21 @@ import Navbar from "./components/navbar/Navbar";
 import GlobalStyle from "./styles/globalStyles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchSection from "./components/searchSection/SearchSection";
-import Home from "./pages/HomePage/Home";
-import Browse from "./pages/BrowsePage/Browse";
-import Product from "./pages/ProductPage/Product";
-import Cart from "./pages/CartPage/Cart";
-import Checkout from "./pages/CheckoutPage/Checkout";
-import Login from "./pages/LoginPage/Login";
-import Register from "./pages/RegisterPage/Register";
-import Payment from "./pages/PaymentPage/Payment";
-import Receipt from "./pages/ReceiptPage/Receipt";
 import Footer from "./components/footer/Footer";
-import OrderHistory from "./pages/OrderHistoryPage/OrderHistory";
-import OrderDetails from "./pages/OrderHistoryPage/OrderDetails";
+
+import {
+  HomePage,
+  BrowsePage,
+  CartPage,
+  CheckoutPage,
+  LoginPage,
+  RegisterPage,
+  OrderHistoryPage,
+  PaymentPage,
+  ProductPage,
+  ReceiptPage,
+  OrderDetailsPage,
+} from "./pages/index";
 
 function App() {
   return (
@@ -24,17 +27,21 @@ function App() {
       <SearchSection />
 
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/reviewcart" exact component={Cart} />
-        <Route path="/checkout" exact component={Checkout} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        <Route path="/payment" exact component={Payment} />
-        <Route path="/receipt" exact component={Receipt} />
-        <Route path="/orderhistory" exact component={OrderHistory} />
-        <Route path="/orderhistory/:orderId" exact component={OrderDetails} />
-        <Route path="/product/:id" exact component={Product} />
-        <Route path="/browse/:mainCategory" exact component={Browse} />
+        <Route path="/" exact component={HomePage} />
+        <Route path="/reviewcart" exact component={CartPage} />
+        <Route path="/checkout" exact component={CheckoutPage} />
+        <Route path="/login" exact component={LoginPage} />
+        <Route path="/register" exact component={RegisterPage} />
+        <Route path="/payment" exact component={PaymentPage} />
+        <Route path="/receipt" exact component={ReceiptPage} />
+        <Route path="/orderhistory" exact component={OrderHistoryPage} />
+        <Route
+          path="/orderhistory/:orderId"
+          exact
+          component={OrderDetailsPage}
+        />
+        <Route path="/product/:id" exact component={ProductPage} />
+        <Route path="/browse/:mainCategory" exact component={BrowsePage} />
       </Switch>
 
       <Footer />

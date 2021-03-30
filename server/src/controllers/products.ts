@@ -39,80 +39,13 @@ export const getProductById = async (req: Request, res: Response) => {
 export const getProductsBySearch = async (req: Request, res: Response) => {
   const searchTerm = req.query.searchTerm;
 
-  const productCount = await Product.find({
-    name: { $regex: searchTerm, $options: "i" },
-  }).countDocuments();
-
-  const results = { paginatedProducts: [], next: {}, previous: {} };
-
-  const page = +req.query.page;
-  const limit = +req.query.limit;
-
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
-  if (endIndex < productCount) {
-    results.next = {
-      page: page + 1,
-    };
-  }
-
-  if (startIndex > 0) {
-    results.previous = {
-      page: page - 1,
-    };
-  }
-
-  try {
-    results.paginatedProducts = await Product.find({
-      name: { $regex: searchTerm, $options: "i" },
-    })
-      .limit(limit)
-      .skip(startIndex);
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-
-  res.send({ results: results, totalProducts: productCount });
+  paginate(req, res, { name: { $regex: searchTerm, $options: "i" } });
 };
 
 export const getProductByMainCategory = async (req: Request, res: Response) => {
   const category = req.params.mainCategory.toLowerCase();
-  const productCount = await Product.find({
-    mainCategory: category,
-  }).countDocuments();
 
-  const results = { paginatedProducts: [], next: {}, previous: {} };
-
-  const page = +req.query.page;
-  const limit = +req.query.limit;
-
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
-  if (endIndex < productCount) {
-    results.next = {
-      page: page + 1,
-    };
-  }
-
-  if (startIndex > 0) {
-    results.previous = {
-      page: page - 1,
-    };
-  }
-
-  try {
-    results.paginatedProducts = await Product.find({
-      mainCategory: category,
-    })
-      .limit(limit)
-      .skip(startIndex);
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-
-  res.send({ results: results, totalProducts: productCount });
+  paginate(req, res, { mainCategory: category });
 };
 
 export const getMainCategoryData = async (req: Request, res: Response) => {
@@ -175,4 +108,38 @@ export const seedProducts = async (req: Request, res: Response) => {
   await Product.remove({});
   const createdProducts = await Product.insertMany(data);
   res.send({ createdProducts });
+};
+
+const paginate = async (req, res, query) => {
+  const productCount = await Product.find(query).countDocuments();
+
+  const results = { paginatedProducts: [], next: {}, previous: {} };
+
+  const page = +req.query.page;
+  const limit = +req.query.limit;
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  if (endIndex < productCount) {
+    results.next = {
+      page: page + 1,
+    };
+  }
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+    };
+  }
+
+  try {
+    results.paginatedProducts = await Product.find(query)
+      .limit(limit)
+      .skip(startIndex);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+
+  res.send({ results: results, totalProducts: productCount });
 };
