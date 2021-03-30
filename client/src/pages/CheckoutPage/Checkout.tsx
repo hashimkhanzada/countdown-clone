@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiTruck } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../styles/globalStyles";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 import {
   CheckoutContainer,
@@ -24,10 +25,21 @@ const Checkout = () => {
   const deliveryAddress = useSelector(selectDelivery);
   const deliveryDate = useSelector(selectDeliveryDate);
   const dispatch = useDispatch();
-
   const [deliveryType, setDeliveryType] = useState("Delivery");
-
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
+
+  const [deliveryDays, setDeliveryDays] = useState<string[]>([]);
+
+  useEffect(() => {
+    const tempArr: string[] = [];
+    for (let i = 0; i < 5; i++) {
+      tempArr.push(
+        format(new Date(Date.now() + i * 24 * 60 * 60 * 1000), "EEEE, do MMMM")
+      );
+    }
+
+    setDeliveryDays(tempArr);
+  }, []);
 
   const setDeliveryDate = (e: any) => {
     dispatch(changeDeliveryDate(e.target.name));
@@ -84,38 +96,38 @@ const Checkout = () => {
               <div className="deliveryButtons">
                 <button
                   onClick={setDeliveryDate}
-                  name="Monday"
-                  className={deliveryDate === "Monday" ? "selected" : ""}
+                  name={deliveryDays[0]}
+                  className={deliveryDate === deliveryDays[0] ? "selected" : ""}
                 >
-                  Monday
+                  {deliveryDays[0]}
                 </button>
                 <button
                   onClick={setDeliveryDate}
-                  name="Tuesday"
-                  className={deliveryDate === "Tuesday" ? "selected" : ""}
+                  name={deliveryDays[1]}
+                  className={deliveryDate === deliveryDays[1] ? "selected" : ""}
                 >
-                  Tuesday
+                  {deliveryDays[1]}
                 </button>
                 <button
                   onClick={setDeliveryDate}
-                  name="Wednesday"
-                  className={deliveryDate === "Wednesday" ? "selected" : ""}
+                  name={deliveryDays[2]}
+                  className={deliveryDate === deliveryDays[2] ? "selected" : ""}
                 >
-                  Wednesday
+                  {deliveryDays[2]}
                 </button>
                 <button
                   onClick={setDeliveryDate}
-                  name="Thursday"
-                  className={deliveryDate === "Thursday" ? "selected" : ""}
+                  name={deliveryDays[3]}
+                  className={deliveryDate === deliveryDays[3] ? "selected" : ""}
                 >
-                  Thursday
+                  {deliveryDays[3]}
                 </button>
                 <button
                   onClick={setDeliveryDate}
-                  name="Friday"
-                  className={deliveryDate === "Friday" ? "selected" : ""}
+                  name={deliveryDays[4]}
+                  className={deliveryDate === deliveryDays[4] ? "selected" : ""}
                 >
-                  Friday
+                  {deliveryDays[4]}
                 </button>
               </div>
             </TimeslotRow>

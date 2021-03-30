@@ -3,6 +3,7 @@ import { Button } from "../../styles/globalStyles";
 import PageMap from "../../components/pageMap/PageMap";
 import { useHistory } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import { format } from "date-fns";
 
 import {
   ReceiptContainer,
@@ -113,7 +114,11 @@ const Receipt = () => {
                     </div>
                     <div>
                       <p>
-                        <strong>Order created:</strong> {receipt?.createdAt}
+                        <strong>Order created:</strong>{" "}
+                        {format(
+                          new Date(receipt?.createdAt.split("T")[0]),
+                          " dd-MMM-yyyy"
+                        )}
                       </p>
                     </div>
                   </div>
@@ -130,29 +135,33 @@ const Receipt = () => {
                 </ReceiptInfoRow>
                 <OrderItemsRow>
                   <table ref={tableRef}>
-                    <tr>
-                      <th>Qty</th>
-                      <th>Name</th>
-                      <th>Price</th>
-                    </tr>
-                    {receipt?.orderItems.map(
-                      ({ quantity, productName, productSubTotal }: any) => {
-                        return (
-                          <>
-                            <tr>
-                              <td>{quantity}</td>
-                              <td>{productName}</td>
-                              <td>${productSubTotal}</td>
-                            </tr>
-                          </>
-                        );
-                      }
-                    )}
-                    <tr>
-                      <th>Total</th>
-                      <td>${receipt?.totalPrice}</td>
-                      <td></td>
-                    </tr>
+                    <thead>
+                      <tr>
+                        <th>Qty</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {receipt?.orderItems.map(
+                        ({ quantity, productName, productSubTotal }: any) => {
+                          return (
+                            <>
+                              <tr>
+                                <td>{quantity}</td>
+                                <td>{productName}</td>
+                                <td>${productSubTotal}</td>
+                              </tr>
+                            </>
+                          );
+                        }
+                      )}
+                      <tr>
+                        <th>Total</th>
+                        <td>${receipt?.totalPrice}</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
                   </table>
                 </OrderItemsRow>
               </>

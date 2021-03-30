@@ -31,7 +31,7 @@ export const MainContainer = styled.div`
 
     button {
       font-weight: bolder;
-      font-size: 20px;
+      font-size: 16px;
     }
     @media screen and (max-width: 1030px) {
       align-items: center;

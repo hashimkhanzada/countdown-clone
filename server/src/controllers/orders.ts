@@ -9,7 +9,7 @@ export const newOrder = async (req: Request, res: Response) => {
     const order = new Order({
       orderItems: req.body.orderItems,
       user: req.body.user._id,
-      totalPrice: req.body.totalPrice,
+      totalPrice: Math.round(req.body.totalPrice),
       address: req.body.address,
       deliveryDate: req.body.deliveryDate,
     });

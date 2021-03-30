@@ -60,7 +60,7 @@ const Home = () => {
                 height="24"
                 viewBox="0 0 24 24"
               >
-                <g fill="inherit" fill-rule="evenodd">
+                <g fill="inherit" fillRule="evenodd">
                   <g fill="inherit">
                     <g>
                       <path
@@ -80,7 +80,7 @@ const Home = () => {
                 height="24"
                 viewBox="0 0 24 24"
               >
-                <g fill="inherit" fill-rule="evenodd">
+                <g fill="inherit" fillRule="evenodd">
                   <g fill="inherit">
                     <g>
                       <path
@@ -100,7 +100,7 @@ const Home = () => {
                 height="24"
                 viewBox="0 0 24 24"
               >
-                <g fill="inherit" fill-rule="evenodd">
+                <g fill="inherit" fillRule="evenodd">
                   <g fill="inherit">
                     <g>
                       <path
@@ -122,7 +122,7 @@ const Home = () => {
                 height="24"
                 viewBox="0 0 24 24"
               >
-                <g fill="inherit" fill-rule="evenodd">
+                <g fill="inherit" fillRule="evenodd">
                   <g fill="inherit">
                     <g>
                       <path
@@ -146,9 +146,9 @@ const Home = () => {
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <g
                     id="Service-bar-General-guide"
@@ -162,7 +162,7 @@ const Home = () => {
                       <path
                         d="M12.15,9.05941988e-14 C18.8602597,9.05941988e-14 24.3,5.43974029 24.3,12.15 C24.3,18.8602597 18.8602597,24.3 12.15,24.3 C5.43974029,24.3 9.05941988e-14,18.8602597 9.05941988e-14,12.15 C9.05941988e-14,5.43974029 5.43974029,9.05941988e-14 12.15,9.05941988e-14 Z M12.15,1 C5.99202504,1 1,5.99202504 1,12.15 C1,18.307975 5.99202504,23.3 12.15,23.3 C18.307975,23.3 23.3,18.307975 23.3,12.15 C23.3,5.99202504 18.307975,1 12.15,1 Z"
                         id="Oval"
-                        fill-rule="nonzero"
+                        fillRule="nonzero"
                       ></path>
                       <g
                         id="Brand-/-Logo-/-Wapple-mono"
@@ -186,7 +186,7 @@ const Home = () => {
                 height="24"
                 viewBox="0 0 24 24"
               >
-                <g fill="inherit" fill-rule="evenodd">
+                <g fill="inherit" fillRule="evenodd">
                   <g fill="inherit">
                     <g>
                       <path

@@ -18,7 +18,7 @@ interface IReceipt {
 }
 
 const initialState: DeliveryState = {
-  deliveryAddress: "Main City, Wanganui",
+  deliveryAddress: "",
   deliveryDate: "",
   deliveryReceipt: {
     address: "",

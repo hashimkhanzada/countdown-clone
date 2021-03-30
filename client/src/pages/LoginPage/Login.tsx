@@ -4,6 +4,9 @@ import PageMap from "../../components/pageMap/PageMap";
 import { Button } from "../../styles/globalStyles";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 
+import { useDispatch } from "react-redux";
+import { changeDeliveryAddress } from "../../features/delivery/deliverySlice";
+
 import { LoginContainer, LoginMain, TitleRow, MainForm } from "./Login.styles";
 
 const initialState = {
@@ -14,6 +17,7 @@ const initialState = {
 const Login = () => {
   const [form, setForm] = useState(initialState);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -22,6 +26,7 @@ const Login = () => {
       .userSignIn(form)
       .then(({ data }: any) => {
         localStorage.setItem("profile", JSON.stringify(data));
+        dispatch(changeDeliveryAddress(data.result.address));
         history.push("/");
       })
       .catch((err) => console.log(err));

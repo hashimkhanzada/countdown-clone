@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PageMap from "../../components/pageMap/PageMap";
+import { format } from "date-fns";
 
 const OrderDetails = ({ match }: any) => {
   const [orderDetails, setOrderDetails] = useState<any>();
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
+  const [orderPlaced, setOrderPlaced] = useState<any>();
 
   useEffect(() => {
     const getOrderHistory = async () => {
@@ -13,7 +15,12 @@ const OrderDetails = ({ match }: any) => {
         .fetchOrderById(match.params.orderId)
         .then((response: any) => {
           setOrderDetails(response.data);
-          console.log(response.data);
+          setOrderPlaced(
+            format(
+              new Date(response.data.createdAt.split("T")[0]),
+              " dd-MMM-yyyy"
+            )
+          );
         })
         .catch((err: any) => console.log(err));
     };
@@ -35,7 +42,7 @@ const OrderDetails = ({ match }: any) => {
                 </div>
 
                 <p>
-                  Order placed on <strong>{orderDetails?.createdAt}</strong>
+                  Order placed on <strong>{orderPlaced}</strong>
                 </p>
                 <p>
                   Delivery to: <strong>{orderDetails?.address}</strong>
@@ -45,22 +52,26 @@ const OrderDetails = ({ match }: any) => {
                 </p>
 
                 <table>
-                  <tr>
-                    <th>Qty</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                  </tr>
-                  {orderDetails?.orderItems.map(
-                    ({ quantity, productName, productSubTotal }: any) => {
-                      return (
-                        <tr>
-                          <td>{quantity}</td>
-                          <td>{productName}</td>
-                          <td>${productSubTotal}</td>
-                        </tr>
-                      );
-                    }
-                  )}
+                  <thead>
+                    <tr>
+                      <th>Qty</th>
+                      <th>Description</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orderDetails?.orderItems.map(
+                      ({ quantity, productName, productSubTotal }: any) => {
+                        return (
+                          <tr>
+                            <td>{quantity}</td>
+                            <td>{productName}</td>
+                            <td>${productSubTotal}</td>
+                          </tr>
+                        );
+                      }
+                    )}
+                  </tbody>
                 </table>
               </>
             ) : (
