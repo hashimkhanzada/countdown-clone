@@ -46,7 +46,7 @@ export const NavToolBar = styled.ul<{ click: Boolean }>`
 
   @media screen and (max-width: 1030px) {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     height: ${({ click }) => (click ? "92vh" : 0)};
     position: absolute;
@@ -65,6 +65,10 @@ export const NavToolBarItem = styled.li`
   transition: all 0.2s ease;
   cursor: pointer;
 
+  @media screen and (max-width: 1030px) {
+    border-bottom: none;
+  }
+
   &:hover {
     border-bottom: 4px solid #007837;
   }
@@ -82,6 +86,9 @@ export const NavLink = styled(Link)`
 
   @media screen and (max-width: 1030px) {
     color: lightgray;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
   }
 `;
 

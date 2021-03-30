@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-interface Props {}
-
-const DropDown = (props: Props) => {
-  const [click, setClick] = useState(false);
-
-  const handleClick = () => setClick(!click);
-
+const DropDown = ({ click, handleClick }: any) => {
   return (
     <DropDownContainer click={click}>
       <Col>
@@ -91,6 +85,17 @@ const DropDownContainer = styled.ul<{ click: Boolean }>`
   cursor: default;
   border-bottom: solid 4px #007837;
   z-index: 999;
+
+  @media screen and (max-width: 1030px) {
+    position: relative;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border: 0;
+    background: #39464e;
+    color: white;
+  }
 `;
 
 const DropDownItem = styled.li``;
@@ -103,6 +108,13 @@ const DropDownLink = styled(Link)`
   color: #39464e;
   font-size: 14px;
   padding: 5px;
+
+  @media screen and (max-width: 1030px) {
+    color: lightgray;
+    text-align: left;
+    font-weight: bolder;
+    padding: 8px 0;
+  }
 
   &:hover {
     background-color: #ececec;

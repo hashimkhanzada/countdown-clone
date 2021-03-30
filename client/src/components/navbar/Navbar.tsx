@@ -26,6 +26,7 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
   const history = useHistory();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -66,10 +67,12 @@ const Navbar = () => {
       setImgUrl(
         "https://static.countdown.co.nz/assets/images/Mobile/icon-wapple.svg"
       );
+      setIsMobile(true);
     } else {
       setImgUrl(
         "https://static.countdown.co.nz/assets/images/Header/countdown-desktop-logo.svg"
       );
+      setIsMobile(false);
     }
   };
 
@@ -118,15 +121,20 @@ const Navbar = () => {
               </NavLink>
             </NavToolBarItem>
 
-            <NavToolBarItem
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            >
-              <NavLink to="#" onClick={closeMobileMenu}>
-                BROWSE
-              </NavLink>
-              {dropdown && <DropDown />}
-            </NavToolBarItem>
+            {!isMobile ? (
+              <NavToolBarItem
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+              >
+                <NavLink to="">BROWSE</NavLink>
+                {dropdown && <DropDown />}
+              </NavToolBarItem>
+            ) : (
+              <NavToolBarItem>
+                <NavLink to="">BROWSE</NavLink>
+                <DropDown click={!click} handleClick={handleClick} />
+              </NavToolBarItem>
+            )}
 
             <NavToolBarItem>
               <NavLink to="/specials" onClick={closeMobileMenu}>
