@@ -3,6 +3,7 @@ import ProductCard from "../../components/productCard/ProductCard";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PaginationBar from "../../components/paginationBar/PaginationBar";
 import IsLoadingHOC from "../../IsLoadingHOC";
+import { Product } from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -21,26 +22,6 @@ import {
   PaginationContainer,
 } from "./Browse.styles";
 import PageMap from "../../components/pageMap/PageMap";
-
-interface ProductInfo {
-  _id?: string;
-  subCategory?: string;
-  claims?: string;
-  decimalPrice?: string;
-  image?: string;
-  ingredients?: string;
-  isOnSale?: boolean;
-  madeIn?: string;
-  mainCategory?: string;
-  name?: string;
-  originalPrice?: string;
-  pricePerSpecificUnit?: string;
-  saleType?: [string];
-  specificUnit?: string;
-  totalPrice?: number;
-  weight?: number;
-  weightUnit?: string;
-}
 
 const Browse = ({ setLoading, match }: any) => {
   const [productData, setProductData] = useState([]);
@@ -176,7 +157,7 @@ const Browse = ({ setLoading, match }: any) => {
               </select>
             </FilterContainer>
             <ProductsContainer>
-              {productData?.map((data: ProductInfo) => {
+              {productData?.map((data: Product) => {
                 return (
                   <ProductCard
                     key={data._id}

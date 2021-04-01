@@ -39,7 +39,7 @@ export const NavHeader = styled.div`
   display: flex;
 `;
 
-export const NavToolBar = styled.ul<{ click: Boolean }>`
+export const NavToolBar = styled.ul<{ click: boolean }>`
   display: flex;
   list-style: none;
   flex-grow: 1;

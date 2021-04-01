@@ -72,7 +72,7 @@ const DropDown = ({ click, handleClick }: any) => {
 
 export default DropDown;
 
-const DropDownContainer = styled.ul<{ click: Boolean }>`
+const DropDownContainer = styled.ul<{ click: boolean }>`
   background: white;
   width: 100%;
   position: absolute;

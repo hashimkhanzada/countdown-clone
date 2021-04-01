@@ -26,9 +26,7 @@ import {
   selectDelivery,
 } from "../../features/delivery/deliverySlice";
 
-interface Props {}
-
-const SearchSection = (props: Props) => {
+const SearchSection = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const subTotal = useSelector(selectSubTotal);

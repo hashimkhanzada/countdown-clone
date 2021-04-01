@@ -1,23 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
-interface CartState {
-  cartItems: any;
-  subTotal: any;
-}
+import { CartProduct as Cart } from "../../types";
 
-interface Cart {
-  _id?: string;
-  subCategory?: string;
-  decimalPrice?: string;
-  mainCategory?: string;
-  name?: string;
-  originalPrice?: string;
-  pricePerSpecificUnit?: string;
-  specificUnit?: string;
-  totalPrice: number;
-  quantity: number;
-  calculatedPrice: number;
+interface CartState {
+  cartItems: Cart[];
+  subTotal: number | string;
 }
 
 const initialState: CartState = {
@@ -29,7 +17,12 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    incrementCart: (state, action: PayloadAction<any>) => {
+    incrementCart: (
+      state,
+      action: PayloadAction<{
+        selectedProduct: Cart;
+      }>
+    ) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
@@ -39,8 +32,8 @@ export const cartSlice = createSlice({
 
       cartItems.forEach((cp: Cart) => {
         if (cp._id === action.payload.selectedProduct._id) {
-          cp.quantity += 1;
-          cp.calculatedPrice = (cp.totalPrice / 100) * cp.quantity;
+          cp.quantity! += 1;
+          cp.calculatedPrice = (cp.totalPrice! / 100) * cp.quantity!;
           productAlreadyInCart = true;
         }
       });
@@ -49,18 +42,23 @@ export const cartSlice = createSlice({
         cartItems.push({
           ...action.payload.selectedProduct,
           quantity: 1,
-          calculatedPrice: action.payload.selectedProduct.totalPrice / 100,
+          calculatedPrice: action.payload.selectedProduct.totalPrice! / 100,
         });
         state.cartItems = [...cartItems];
       }
     },
-    decrementCart: (state, action: PayloadAction<any>) => {
+    decrementCart: (
+      state,
+      action: PayloadAction<{
+        selectedProduct: { _id?: string };
+      }>
+    ) => {
       const cartItems = state.cartItems;
 
       cartItems.forEach((cp: Cart) => {
         if (cp._id === action.payload.selectedProduct._id) {
-          cp.quantity -= 1;
-          cp.calculatedPrice = (cp.totalPrice / 100) * cp.quantity;
+          cp.quantity! -= 1;
+          cp.calculatedPrice = (cp.totalPrice! / 100) * cp.quantity!;
 
           if (cp.quantity === 0) {
             const newArr = state.cartItems.filter(
@@ -72,7 +70,7 @@ export const cartSlice = createSlice({
         }
       });
     },
-    removeFromCart: (state, action: PayloadAction<any>) => {
+    removeFromCart: (state, action: PayloadAction<string | undefined>) => {
       const newArr = state.cartItems.filter(
         (item: Cart) => item._id !== action.payload
       );
@@ -87,7 +85,7 @@ export const cartSlice = createSlice({
       let subTotal = 0;
 
       cartItems.forEach((element: Cart) => {
-        subTotal += (element.totalPrice / 100) * element.quantity;
+        subTotal += (element.totalPrice! / 100) * element.quantity!;
       });
 
       state.subTotal = subTotal.toFixed(2);

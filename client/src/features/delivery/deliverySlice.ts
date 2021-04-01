@@ -1,20 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { Receipt } from "../../types";
 
 interface DeliveryState {
   deliveryAddress: string;
   deliveryDate: string;
-  deliveryReceipt: IReceipt;
-}
-
-interface IReceipt {
-  address: string;
-  createdAt: string;
-  deliveryDate: string;
-  orderItems: [];
-  totalPrice: number;
-  user: string;
-  _id: string;
+  deliveryReceipt: Receipt;
 }
 
 const initialState: DeliveryState = {
@@ -35,13 +26,13 @@ export const deliverySlice = createSlice({
   name: "delivery",
   initialState,
   reducers: {
-    changeDeliveryAddress: (state, action: PayloadAction<any>) => {
+    changeDeliveryAddress: (state, action: PayloadAction<string>) => {
       state.deliveryAddress = action.payload;
     },
-    changeDeliveryDate: (state, action: PayloadAction<any>) => {
+    changeDeliveryDate: (state, action: PayloadAction<string>) => {
       state.deliveryDate = action.payload;
     },
-    setDeliveryReceipt: (state, action: PayloadAction<any>) => {
+    setDeliveryReceipt: (state, action: PayloadAction<Receipt>) => {
       state.deliveryReceipt = action.payload;
     },
   },

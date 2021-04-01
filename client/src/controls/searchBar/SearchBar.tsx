@@ -13,9 +13,7 @@ import {
   SearchIcon,
 } from "./SearchBar.styles";
 
-interface Props {}
-
-const SearchBar = (props: Props) => {
+const SearchBar = () => {
   const dispatch = useDispatch();
   const searchValue = useSelector(selectSearch);
 

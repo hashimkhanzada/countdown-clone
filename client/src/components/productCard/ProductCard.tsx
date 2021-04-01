@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../../styles/globalStyles";
 import { Link } from "react-router-dom";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { CartProduct } from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -47,7 +48,7 @@ const ProductCard = (props: Props) => {
   const [isInCart, setIsInCart] = useState(false);
 
   const addToCart = () => {
-    let cartData = { selectedProduct: props, count: numberSelected };
+    let cartData = { selectedProduct: props };
 
     setIsInCart(true);
     dispatch(incrementCart(cartData));
@@ -68,10 +69,10 @@ const ProductCard = (props: Props) => {
   };
 
   useEffect(() => {
-    cart.forEach((cartItem: any) => {
+    cart.forEach((cartItem: CartProduct) => {
       if (cartItem._id === props._id) {
         setIsInCart(true);
-        setNumberSelected(cartItem.quantity);
+        setNumberSelected(cartItem.quantity!);
       }
     });
   }, [cart]);

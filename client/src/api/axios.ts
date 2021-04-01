@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://countdown-clone.herokuapp.com/api/";
+const BASE_URL = "http://localhost:5002/api/";
 
 export const ENDPOINTS = {
   PRODUCTS: "products",
@@ -10,16 +10,16 @@ export const ENDPOINTS = {
   ORDERS: "orders",
 };
 
-export const createAPIEndpoint = (endpoint: String) => {
+export const createAPIEndpoint = (endpoint: string) => {
   let url = BASE_URL + endpoint;
 
   return {
     fetchAllProducts: () => axios.get(url),
 
-    fetchById: (id: String) => axios.get(`${url}/${id}`),
+    fetchById: (id: string) => axios.get(`${url}/${id}`),
 
     fetchProductsByMainCategory: (
-      mainCategory: String,
+      mainCategory: string,
       currentPage: number,
       listLimit: number
     ) =>
@@ -27,14 +27,14 @@ export const createAPIEndpoint = (endpoint: String) => {
         `${url}/${mainCategory}/data?page=${currentPage}&limit=${listLimit}`
       ),
 
-    fetchSubCategoryData: (subCategory: String) =>
+    fetchSubCategoryData: (subCategory: string) =>
       axios.get(`${url}/${subCategory}/subcategory`),
 
-    fetchMainCategoryData: (searchTerm: String) =>
+    fetchMainCategoryData: (searchTerm: string) =>
       axios.get(`${url}/category?searchTerm=${searchTerm}`),
 
     fetchBySearch: (
-      searchTerm: String,
+      searchTerm: string,
       currentPage: number,
       listLimit: number
     ) =>
@@ -42,17 +42,17 @@ export const createAPIEndpoint = (endpoint: String) => {
         `${url}?searchTerm=${searchTerm}&page=${currentPage}&limit=${listLimit}`
       ),
 
-    userSignIn: (formData: { email: String; password: String }) => {
+    userSignIn: (formData: { email: string; password: string }) => {
       const data = axios.post(`${url}/signin`, formData);
       return data;
     },
 
     userRegister: (formData: {
-      firstName: String;
-      lastName: String;
-      email: String;
-      password: String;
-      address: String;
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+      address: string;
     }) => {
       const data = axios.post(`${url}/signup`, formData);
       return data;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { CartProduct } from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -48,16 +49,17 @@ const CartCard = (props: Props) => {
   const [totalPrice, setTotalPrice] = useState("0.00");
 
   const addToCart = () => {
-    let cartData = { selectedProduct: props };
+    let cartData = {
+      selectedProduct: { _id: props._id, totalPrice: props.totalPrice },
+    };
 
     dispatch(incrementCart(cartData));
   };
 
   const decrementQuantity = () => {
-    const { _id } = props;
     let cartData = {
       selectedProduct: {
-        _id,
+        _id: props._id,
       },
     };
 
@@ -69,10 +71,10 @@ const CartCard = (props: Props) => {
   };
 
   useEffect(() => {
-    cart.forEach((cartItem: any) => {
+    cart.forEach((cartItem: CartProduct) => {
       if (cartItem._id === props._id) {
-        setNumberSelected(cartItem.quantity);
-        setTotalPrice(cartItem.calculatedPrice.toFixed(2));
+        setNumberSelected(cartItem.quantity!);
+        setTotalPrice(cartItem.calculatedPrice!.toFixed(2));
       }
     });
   }, [cart]);

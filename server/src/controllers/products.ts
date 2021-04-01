@@ -1,26 +1,7 @@
 import { Request, Response } from "express";
 import Product from "../models/product";
 import data from "../seedData";
-
-interface ProductInfo {
-  _id?: string;
-  subCategory?: string;
-  claims?: string;
-  decimalPrice?: string;
-  image?: string;
-  ingredients?: string;
-  isOnSale?: boolean;
-  madeIn?: string;
-  mainCategory?: string;
-  name?: string;
-  originalPrice?: string;
-  pricePerSpecificUnit?: string;
-  saleType?: [string];
-  specificUnit?: string;
-  totalPrice?: number;
-  weight?: number;
-  weightUnit?: string;
-}
+import { Product as ProductType } from "../types";
 
 export const getProducts = async (req: Request, res: Response) => {
   const products = await Product.find({});
@@ -57,7 +38,7 @@ export const getMainCategoryData = async (req: Request, res: Response) => {
 
   const categories = [];
 
-  products.forEach((element: ProductInfo) => {
+  products.forEach((element: ProductType) => {
     if (!categories.some((item) => item.categoryName == element.mainCategory)) {
       categories.push({
         categoryName: element.mainCategory,
@@ -84,7 +65,7 @@ export const getSubCategoryData = async (req: Request, res: Response) => {
 
   const subCategories = [];
 
-  products.forEach((element: ProductInfo) => {
+  products.forEach((element: ProductType) => {
     if (
       !subCategories.some((item) => item.subCategoryName == element.subCategory)
     ) {

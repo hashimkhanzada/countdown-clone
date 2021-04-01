@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CartCard from "../../components/cartCard/CartCard";
+import { Product } from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -21,26 +22,6 @@ import { Button } from "../../styles/globalStyles";
 import { Link } from "react-router-dom";
 import PageMap from "../../components/pageMap/PageMap";
 
-interface ProductInfo {
-  _id?: string;
-  subCategory?: string;
-  claims?: string;
-  decimalPrice?: string;
-  image?: string;
-  ingredients?: string;
-  isOnSale?: boolean;
-  madeIn?: string;
-  mainCategory?: string;
-  name?: string;
-  originalPrice?: string;
-  pricePerSpecificUnit?: string;
-  saleType?: [string];
-  specificUnit?: string;
-  totalPrice?: number;
-  weight?: number;
-  weightUnit?: string;
-}
-
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
@@ -60,7 +41,7 @@ const Cart = () => {
           <h2>{cart.length} items</h2>
         </TitleRow>
         <CartMain>
-          {cart?.map((data: ProductInfo) => {
+          {cart?.map((data: Product) => {
             return (
               <CartCard
                 key={data._id}

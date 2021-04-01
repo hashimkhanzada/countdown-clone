@@ -4,6 +4,7 @@ import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import PageMap from "../../components/pageMap/PageMap";
 import { useHistory } from "react-router-dom";
 import IsLoadingHOC from "../../IsLoadingHOC";
+import { Order, Receipt } from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -25,14 +26,6 @@ import {
   CreditCardRow,
 } from "./Payment.styles";
 
-interface IOrder {
-  quantity: Number;
-  productSubTotal: Number;
-  productId: string;
-  productImage: string;
-  productName: string;
-}
-
 const Payment = ({ setLoading }: any) => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
@@ -42,15 +35,15 @@ const Payment = ({ setLoading }: any) => {
 
   const history = useHistory();
 
-  const [orderItems, setOrderItems] = useState<IOrder[]>();
+  const [orderItems, setOrderItems] = useState<Order[]>();
   const [user] = useState(JSON.parse(localStorage.getItem("profile") || "{}"));
 
   useEffect(() => {
     setLoading(false);
-    const newOrder: IOrder[] = [];
+    const newOrder: Order[] = [];
 
     cart.forEach((el: any) => {
-      const orderItem: IOrder = {
+      const orderItem: Order = {
         quantity: el.quantity,
         productSubTotal: el.calculatedPrice,
         productId: el._id,
@@ -74,7 +67,7 @@ const Payment = ({ setLoading }: any) => {
         address: deliveryAddress,
         deliveryDate: deliveryDate,
       })
-      .then((response: any) => {
+      .then((response: { data: { order: Receipt } }) => {
         dispatch(setDeliveryReceipt(response.data.order));
         dispatch(clearCart());
         setLoading(false);

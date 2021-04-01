@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { createAPIEndpoint, ENDPOINTS } from "../../api/axios";
 import { Button } from "../../styles/globalStyles";
 import IsLoadingHOC from "../../IsLoadingHOC";
-
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { CartProduct } from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -22,29 +22,8 @@ import {
   Price,
 } from "./Product.styles";
 
-interface ProductInfo {
-  _id: string;
-  subCategory?: string;
-  claims?: string;
-  decimalPrice?: string;
-  image?: string;
-  ingredients?: string;
-  isOnSale?: boolean;
-  madeIn?: string;
-  mainCategory?: string;
-  name?: string;
-  originalPrice?: string;
-  pricePerSpecificUnit?: string;
-  saleType?: [string];
-  specificUnit?: string;
-  totalPrice?: number;
-  weight?: number;
-  weightUnit?: string;
-  description?: string;
-}
-
 const Product = ({ match, setLoading }: any) => {
-  const [productData, setProductData] = useState<ProductInfo>();
+  const [productData, setProductData] = useState<CartProduct>();
 
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
@@ -56,7 +35,7 @@ const Product = ({ match, setLoading }: any) => {
     const GetData = async () => {
       await createAPIEndpoint(ENDPOINTS.BROWSE)
         .fetchById(match.params.id)
-        .then((response: any) => {
+        .then((response: { data: CartProduct }) => {
           setProductData(response.data);
           setLoading(false);
         })
@@ -67,7 +46,7 @@ const Product = ({ match, setLoading }: any) => {
   }, [match]);
 
   const addToCart = () => {
-    let cartData = { selectedProduct: productData, count: numberSelected };
+    let cartData = { selectedProduct: productData! };
 
     setIsInCart(true);
     dispatch(incrementCart(cartData));
