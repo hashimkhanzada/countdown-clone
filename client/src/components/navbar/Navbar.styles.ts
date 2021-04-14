@@ -64,6 +64,7 @@ export const NavToolBarItem = styled.li`
   border-bottom: 4px solid transparent;
   transition: all 0.2s ease;
   cursor: pointer;
+  width: 100%;
 
   @media screen and (max-width: 1030px) {
     border-bottom: none;
@@ -89,6 +90,7 @@ export const NavLink = styled(Link)`
     align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
+    font-size: 20px;
   }
 `;
 

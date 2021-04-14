@@ -89,11 +89,13 @@ const DropDownContainer = styled.ul<{ click: boolean }>`
   @media screen and (max-width: 1030px) {
     position: relative;
     top: 0;
+    padding-left: 5px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     border: 0;
-    background: #39464e;
+    background: #3f4f58;
+
     color: white;
   }
 `;

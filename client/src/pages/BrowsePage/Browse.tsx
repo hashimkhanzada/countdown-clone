@@ -32,6 +32,8 @@ const Browse = ({ setLoading, match }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLastPage, setIsLastPage] = useState(true);
   const [isFirstPage, setIsFirstPage] = useState(true);
+  const [sortBy, setSortBy] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
 
   const searchValue = useSelector(selectSearch);
   const dispatch = useDispatch();
@@ -43,9 +45,12 @@ const Browse = ({ setLoading, match }: any) => {
   useEffect(() => {
     setLoading(true);
     const GetData = async () => {
-      await createAPIEndpoint(ENDPOINTS.BROWSE)
-        .fetchProductsByMainCategory(
-          match.params.mainCategory,
+      await createAPIEndpoint(ENDPOINTS.PRODUCTS)
+        .fetchProducts(
+          searchValue ? "" : match.params.mainCategory,
+          searchValue,
+          "",
+          sortBy,
           currentPage,
           itemsPerPage
         )
@@ -69,26 +74,15 @@ const Browse = ({ setLoading, match }: any) => {
         .catch((err) => console.log(err));
     };
 
-    const GetSearchData = async () => {
-      await createAPIEndpoint(ENDPOINTS.SEARCHPRODUCT)
-        .fetchBySearch(searchValue, currentPage, itemsPerPage)
-        .then((response: any) => {
-          setProductData(response.data.results.paginatedProducts);
-          setTotalItems(response.data.totalProducts);
-          setLoading(false);
-          response.data.results.next.page
-            ? setIsLastPage(false)
-            : setIsLastPage(true);
-
-          response.data.results.previous.page
-            ? setIsFirstPage(false)
-            : setIsFirstPage(true);
-        })
-        .catch((err) => console.log(err));
-    };
-
-    searchValue ? GetSearchData() : GetData();
-  }, [match, currentPage, searchValue, itemsPerPage]);
+    GetData();
+  }, [
+    match,
+    currentPage,
+    searchValue,
+    itemsPerPage,
+    sortBy,
+    selectedSubCategory,
+  ]);
 
   useEffect(() => {
     const GetSubData = async () => {
@@ -148,12 +142,21 @@ const Browse = ({ setLoading, match }: any) => {
                 <h1>{match.params.mainCategory}</h1>
               )}
 
-              <span>{productData?.length} items</span>
+              <span>
+                - Showing {productData?.length} of {totalItems} items
+              </span>
             </HeadingContainer>
             <FilterContainer>
               <p>Sort by:</p>
-              <select>
+              <select
+                onChange={(e) => {
+                  setSortBy(e.target.value);
+                }}
+              >
                 <option value="">Relevance</option>
+                <option value="lowest">Lowest Price</option>
+                <option value="highest">Highest Price</option>
+                <option value="lowestUnit">Lowest Unit Price</option>
               </select>
             </FilterContainer>
             <ProductsContainer>

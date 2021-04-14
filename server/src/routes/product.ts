@@ -4,10 +4,9 @@ import expressAsyncHandler from "express-async-handler";
 import {
   getProducts,
   getProductById,
-  getProductByMainCategory,
+  getProductList,
   seedProducts,
   getSubCategoryData,
-  getProductsBySearch,
   getMainCategoryData,
 } from "../controllers/products";
 
@@ -17,14 +16,9 @@ router.get("/", expressAsyncHandler(getProducts));
 
 router.get("/seed", expressAsyncHandler(seedProducts));
 
-router.get("/search", expressAsyncHandler(getProductsBySearch));
-
 router.get("/search/category", expressAsyncHandler(getMainCategoryData));
 
-router.get(
-  "/browse/:mainCategory/data",
-  expressAsyncHandler(getProductByMainCategory)
-);
+router.get("/browse/data", expressAsyncHandler(getProductList));
 
 router.get(
   "/browse/:mainCategory/subcategory",

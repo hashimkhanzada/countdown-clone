@@ -17,16 +17,35 @@ export const getProductById = async (req: Request, res: Response) => {
   }
 };
 
-export const getProductsBySearch = async (req: Request, res: Response) => {
+export const getProductList = async (req: Request, res: Response) => {
+  const mainCategory = req.query.mainCategory;
+  const subCategory = req.query.subCategory;
+  const sortBy = req.query.sortBy;
   const searchTerm = req.query.searchTerm;
 
-  paginate(req, res, { name: { $regex: searchTerm, $options: "i" } });
-};
+  const mainCategoryFilter = mainCategory ? { mainCategory } : {};
 
-export const getProductByMainCategory = async (req: Request, res: Response) => {
-  const category = req.params.mainCategory.toLowerCase();
+  const searchFilter = searchTerm
+    ? { name: { $regex: searchTerm, $options: "i" } }
+    : {};
 
-  paginate(req, res, { mainCategory: category });
+  const subCategoryFilter = subCategory ? { subCategory } : {};
+
+  const sortProducts =
+    sortBy === "lowest"
+      ? { totalPrice: 1 }
+      : sortBy === "highest"
+      ? { totalPrice: -1 }
+      : sortBy === "lowestUnit"
+      ? { pricePerSpecificUnit: 1 }
+      : {};
+
+  paginate(
+    req,
+    res,
+    { ...mainCategoryFilter, ...subCategoryFilter, ...searchFilter },
+    sortProducts
+  );
 };
 
 export const getMainCategoryData = async (req: Request, res: Response) => {
@@ -91,7 +110,7 @@ export const seedProducts = async (req: Request, res: Response) => {
   res.send({ createdProducts });
 };
 
-const paginate = async (req, res, query) => {
+const paginate = async (req, res, query, sortProducts) => {
   const productCount = await Product.find(query).countDocuments();
 
   const results = { paginatedProducts: [], next: {}, previous: {} };
@@ -117,7 +136,8 @@ const paginate = async (req, res, query) => {
   try {
     results.paginatedProducts = await Product.find(query)
       .limit(limit)
-      .skip(startIndex);
+      .skip(startIndex)
+      .sort(sortProducts);
   } catch (err) {
     res.status(500).json({ message: err });
   }

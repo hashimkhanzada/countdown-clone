@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = "https://countdown-clone.herokuapp.com/api/";
+const BASE_URL = "http://localhost:5002/api/";
 
 export const ENDPOINTS = {
-  PRODUCTS: "products",
+  PRODUCTS: "products/browse",
   SEARCHPRODUCT: "products/search",
   BROWSE: "products/browse",
   USERS: "users",
@@ -18,13 +18,16 @@ export const createAPIEndpoint = (endpoint: string) => {
 
     fetchById: (id: string) => axios.get(`${url}/${id}`),
 
-    fetchProductsByMainCategory: (
-      mainCategory: string,
+    fetchProducts: (
+      mainCategory: string = "",
+      searchTerm: string = "",
+      subCategory: string = "",
+      sortBy: string = "",
       currentPage: number,
       listLimit: number
     ) =>
       axios.get(
-        `${url}/${mainCategory}/data?page=${currentPage}&limit=${listLimit}`
+        `${url}/data?mainCategory=${mainCategory}&searchTerm=${searchTerm}&subCategory=${subCategory}&sortBy=${sortBy}&page=${currentPage}&limit=${listLimit}`
       ),
 
     fetchSubCategoryData: (subCategory: string) =>

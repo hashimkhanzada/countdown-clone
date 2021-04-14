@@ -33,7 +33,7 @@ const Product = ({ match, setLoading }: any) => {
   useEffect(() => {
     setLoading(true);
     const GetData = async () => {
-      await createAPIEndpoint(ENDPOINTS.BROWSE)
+      await createAPIEndpoint(ENDPOINTS.PRODUCTS)
         .fetchById(match.params.id)
         .then((response: { data: CartProduct }) => {
           setProductData(response.data);

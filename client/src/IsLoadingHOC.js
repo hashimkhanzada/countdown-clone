@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { VscLoading } from "react-icons/vsc";
 
 export const IsLoadingHOC = (WrappedComponent) => {
-  function HOC(props) {
+  const HOC = (props) => {
     const [isLoading, setLoading] = useState(true);
 
     const setLoadingState = (isComponentLoading) => {
@@ -16,7 +16,7 @@ export const IsLoadingHOC = (WrappedComponent) => {
         <WrappedComponent {...props} setLoading={setLoadingState} />
       </>
     );
-  }
+  };
 
   return HOC;
 };
