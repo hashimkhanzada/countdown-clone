@@ -27,8 +27,9 @@ export const LoadingIcon = styled(VscLoading)`
   position: absolute;
   width: 150px;
   height: 150px;
-  left: 45%;
-  top: 40%;
+  left: calc(50vw - 75px);
+  top: calc(50vh - 75px);
+  transform: translate(-50%, -50%);
 
   animation: rotation 3s infinite linear;
   color: #007837;

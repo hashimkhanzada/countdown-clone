@@ -137,19 +137,19 @@ const Navbar = () => {
             )}
 
             <NavToolBarItem>
-              <NavLink to="/specials" onClick={closeMobileMenu}>
+              <NavLink to="/" onClick={closeMobileMenu}>
                 SPECIALS
               </NavLink>
             </NavToolBarItem>
 
             <NavToolBarItem>
-              <NavLink to="/recipes" onClick={closeMobileMenu}>
+              <NavLink to="/" onClick={closeMobileMenu}>
                 RECIPES
               </NavLink>
             </NavToolBarItem>
 
             <NavToolBarItem>
-              <NavLink to="/favourites" onClick={closeMobileMenu}>
+              <NavLink to="/" onClick={closeMobileMenu}>
                 <FavIcon />
                 MY FAVOURITES
               </NavLink>
