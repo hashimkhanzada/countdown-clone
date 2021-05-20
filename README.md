@@ -7,7 +7,7 @@ This web application imitates the design and features of the online countdown sh
 ### Demo available at
 > https://www.hashimkhanzada.com/
 
-## Installation (Windows)
+## Setup (Windows)
 
 #### Pre-requisites
 > [Node v14.*](https://nodejs.org/en/download/)
@@ -64,6 +64,7 @@ countdown-clone-master\client> npm start
 ```
 
 #### Run server:
-```cmd
-countdown-clone-master\server> npm run dev
-```
+Run using IIS Express
+
+![image](https://user-images.githubusercontent.com/74533711/118931409-14810000-b99b-11eb-9597-2a3bb75d5c75.png)
+
