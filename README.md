@@ -11,6 +11,7 @@ This web application imitates the design and features of the online countdown sh
 
 #### Pre-requisites
 > [Node v14.*](https://nodejs.org/en/download/)
+> [NPM].(https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 #### Steps
 - Clone the repo
